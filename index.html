@@ -29,7 +29,7 @@ function noHistory(){
 
  if(localStorage.getItem("history") == "none"){
      if(window.self == window.top){
-         embed("");
+         embed(location.href);
          location.href="https://google.com";
      }
  }
