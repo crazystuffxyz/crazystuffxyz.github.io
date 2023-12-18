@@ -15,13 +15,12 @@ FullVolume();
 document.querySelector("#volume").innerHTML = x.volume;
 }
 function embed(url){
- url = location.href.replace("/index.html", "") + "/" + url;
     var win = window.open();
     win.document.write('<iframe src=' + JSON.stringify(url) + ' style="border:hidden;overflow:hidden;position:absolute;top:0;left:0%;bottom:0%;right:0%;width:100%;height:100%;"></iframe>');
 }
   
 function play(game){
-    embed("projects/" + game + "/index.html");
+    embed("../crazystuffofficial-assets/" + game + "/index.html");
 }  
 function noHistory(){
     localStorage.setItem("history", "none");
@@ -505,7 +504,7 @@ Hot!</a> <br>
 <a href="javascript:void(0)" onclick="embed('Geometry Dash Levels 16-21.html')" class="button button1">Click this to play Geometry Dash Levels 16-21!</a> <br>
  <a href="javascript:void(0)" onclick="embed('Geometry Dash Meltdown.html')" class="button button1">Click this to play Geometry Dash Meltdown!</a> <br>
   <a href="javascript:void(0)" onclick="embed('Geometry Dash Subzero.html')" class="button button1">Click this to play Geometry Dash Subzero!</a> <br>
- <a href="javascript:void(0)" onclick="embed('uv.html')" class="button button1">Click me and go to the url you want in this custom browser!</a> <br>
+ <a href="javascript:void(0)" onclick="embed('uv.html')" class="button button1">Click me and go to the url you want in this custom browser! (Still fixing)</a> <br>
 </p></h4></div>  <br>
 
 <br><h4 style="color:rgb(138, 55, 0)">_____________________________________________________________________________________________________________________________________________________________________________________________________________________
@@ -560,7 +559,7 @@ by the way, thank you for that many visits (above). :-)</p></h3>
 <h5><p style="font-family:arial">
 
 
-</p></h5><h4><p style="font-family:arial">The owner, Shayaan Hooda, hopes you have a fantastic 
+</p></h5><h4><p style="font-family:arial">The owner hopes you have a fantastic 
 day.</p></h4>
 </div>
 <h4 style="color:rgb(115, 70, 2);">_____________________________________________________________________________________________________________________________________________________________________________________________________________________</h4>
