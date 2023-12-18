@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html style="font-size:0.83127vw;" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ <script>
+ var x = document.querySelector("audio");
+
+function FullVolume() {
+  x.volume = 1.0;
+  document.querySelector("#volume").innerHTML = x.volume;
+} 
+
+function TurnOn() {
+window.location.reload();
+FullVolume();
+document.querySelector("#volume").innerHTML = x.volume;
+}
+function embed(url){
+ url = location.href.replace("/index.html", "") + "/" + url;
+    var win = window.open();
+    win.document.write('<iframe src=' + JSON.stringify(url) + ' style="border:hidden;overflow:hidden;position:absolute;top:0;left:0%;bottom:0%;right:0%;width:100%;height:100%;"></iframe>');
+}
+  
+function play(game){
+    embed("projects/" + game + "/index.html");
+}  
+function noHistory(){
+    localStorage.setItem("history", "none");
+ window.location.reload();
+}
+
+ if(localStorage.getItem("history") == "none"){
+     if(window.self == window.top){
+         embed("");
+         location.href="https://google.com";
+     }
+ }
+ function makeTextBigger(){
+var getsize1 = document.getElementById("sizesection1").style.fontSize;
+var getsize2 = document.getElementById("sizesection2").style.fontSize;
+var getsize3 = document.getElementById("sizesection3").style.fontSize;
+var getsize4 = document.getElementById("sizesection4").style.fontSize;
+var getsize5 = document.getElementById("sizesection5").style.fontSize;
+var getsize6 = document.getElementById("sizesection6").style.fontSize;
+
+var size1 = getsize1.replace("vw","");
+var size2 = getsize2.replace("vw","");
+var size3 = getsize3.replace("vw","");
+var size4 = getsize4.replace("vw","");
+var size5 = getsize5.replace("vw","");
+var size6 = getsize6.replace("vw","");
+
+size1 = size1 - -0.10080645161290322;
+size2 = size2 - -0.10080645161290322;
+size3 = size3 - -0.10080645161290322;
+size4 = size4 - -0.10080645161290322;
+size5 = size5 - -0.10080645161290322;
+size6 = size6 - -0.10080645161290322;
+
+document.getElementById("sizesection1").style.fontSize = size1 + "vw";
+document.getElementById("sizesection2").style.fontSize = size2 + "vw";
+document.getElementById("sizesection3").style.fontSize = size3 + "vw";
+document.getElementById("sizesection4").style.fontSize = size4 + "vw";
+document.getElementById("sizesection5").style.fontSize = size5 + "vw";
+document.getElementById("sizesection6").style.fontSize = size6 + "vw";
+
+}
+function makeTextSmaller(){
+var getsize1 = document.getElementById("sizesection1").style.fontSize;
+var getsize2 = document.getElementById("sizesection2").style.fontSize;
+var getsize3 = document.getElementById("sizesection3").style.fontSize;
+var getsize4 = document.getElementById("sizesection4").style.fontSize;
+var getsize5 = document.getElementById("sizesection5").style.fontSize;
+var getsize6 = document.getElementById("sizesection6").style.fontSize;
+
+var size1 = getsize1.replace("vw","");
+var size2 = getsize2.replace("vw","");
+var size3 = getsize3.replace("vw","");
+var size4 = getsize4.replace("vw","");
+var size5 = getsize5.replace("vw","");
+var size6 = getsize6.replace("vw","");
+
+size1 = size1 - 0.10080645161290322;
+size2 = size2 - 0.10080645161290322;
+size3 = size3 - 0.10080645161290322;
+size4 = size4 - 0.10080645161290322;
+size5 = size5 - 0.10080645161290322;
+size6 = size6 - 0.10080645161290322;
+
+document.getElementById("sizesection1").style.fontSize = size1 + "vw";
+document.getElementById("sizesection2").style.fontSize = size2 + "vw";
+document.getElementById("sizesection3").style.fontSize = size3 + "vw";
+document.getElementById("sizesection4").style.fontSize = size4 + "vw";
+document.getElementById("sizesection5").style.fontSize = size5 + "vw";
+document.getElementById("sizesection6").style.fontSize = size6 + "vw";
+
+}
+function setSize(){
+var getsize1 = document.getElementById("sizesection1").style.fontSize;
+var getsize2 = document.getElementById("sizesection2").style.fontSize;
+var getsize3 = document.getElementById("sizesection3").style.fontSize;
+var getsize4 = document.getElementById("sizesection4").style.fontSize;
+var getsize5 = document.getElementById("sizesection5").style.fontSize;
+var getsize6 = document.getElementById("sizesection6").style.fontSize;
+
+var setSize = document.getElementById("sizeInput").value;
+
+var size1 = getsize1.replace("vw","");
+var size2 = getsize2.replace("vw","");
+var size3 = getsize3.replace("vw","");
+var size4 = getsize4.replace("vw","");
+var size5 = getsize5.replace("vw","");
+var size6 = getsize6.replace("vw","");
+
+size1 = setSize;
+size2 = setSize;
+size3 = setSize;
+size4 = setSize;
+size5 = setSize;
+size6 = setSize;
+
+document.getElementById("sizesection1").style.fontSize = size1 + "vw";
+document.getElementById("sizesection2").style.fontSize = size2 + "vw";
+document.getElementById("sizesection3").style.fontSize = size3 + "vw";
+document.getElementById("sizesection4").style.fontSize = size4 + "vw";
+document.getElementById("sizesection5").style.fontSize = size5 + "vw";
+document.getElementById("sizesection6").style.fontSize = size6 + "vw";
+
+}
+
+ </script>
+ <title>Crazy stuff</title>
+ <style>
+ h1{color: rgb(102, 0, 0);}
+ h2{color: rgb(102, 41, 0);}
+ h3{color: rgb(5, 102, 0);}
+ h4{color: rgb(0, 41, 102);}
+ h5{color: rgb(65, 0, 102);}
+ 
+ body{background: linear-gradient(rgb(255, 115, 115), rgb(255, 200, 117), rgb(163, 255, 117), rgb(117, 145, 255), rgb(221, 117, 255), rgb(117, 117, 255), rgb(117, 255, 122), rgb(255, 193, 117), rgb(255, 115, 115));}
+body {font-family:arial ;
+     }
+ </style>
+ <style>
+.button {
+  border: none;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 4px 2px;
+  transition-duration: 0.6s;
+  cursor: pointer;
+}
+
+.button1 {
+  color: blue; 
+}
+
+
+.button2 {
+  color: blue; 
+}
+
+.button1:hover {
+  color: darkgreen;
+}
+.button2:hover {
+  color: darkgreen;
+}
+
+
+</style>
+
+
+ </head>
+ <body>
+     <label>Click this to hide history</label>
+     <input onclick="noHistory()" type="radio">
+<audio autoplay="" loop="" src="song.mp3" hidden=""></audio>
+<div style="font-size:0.83127vw;" id="sizesection1">
+<h1><p style="font-family:arial">Hello! You have arived at the crazy stuff website. Browse around on our programs!</p>
+</h1>
+<h3>Table of Contents:
+</h3><h4 style="color:rgb(138, 55, 0)">
+    <ol style="color:darkblue">
+    <li><a href="#games">Games </a></li>
+    <li><a href="#Crazystuff">Crazy stuff related</a></li>
+    <li><a href="#random">Random stuff</a></li>
+    </ol></h4></div>
+   <h4 style="color:rgb(138, 55, 0)"> 
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+    
+</h4>
+<div style="font-size:0.83127vw;" id="sizesection2">
+<h4 style="color:rgb(0, 73, 176)"><p style="font-family:arial">So far, this many people have visited my webpage:</p></h4>
+
+<img src="https://hitwebcounter.com/counter/counter.php?page=7850403&amp;style=0014&amp;nbdigits=15&amp;type=page&amp;initCount=0" border="0">
+
+<h4 style="color:rgb(115, 70, 2);"><a target="_blank" href="#directions">Click to view</a><br></h4></div>
+<h4 style="color:rgb(115, 70, 2);">_____________________________________________________________________________________________________________________________________________________________________________________________________________________</h4>
+
+
+<div style="font-size:0.83127vw;" id="sizesection3">
+<h2 id="games">Games:</h2>
+<h4><p style="font-family:arial">
+<a href="https://drive.google.com/uc?export=download&id=1mUzz8Bwx9HbIu-rR3UlUjkvJxk824kNK" class="button button1">Click this to go to the tools portal!</a>
+<a class="button button1" href="https://bit.ly/3JboRM7"> Click this to use a calculator I had made! (right click and open in new tab)</a><br> 
+<a href="javascript:void(0)" onclick="play('1')" class="button button1">Click this to play 1!</a> <br>
+<a href="javascript:void(0)" onclick="play('1v1lol')" class="button button1">Click this to play 1v1.lol!</a> <br>
+<a href="javascript:void(0)" onclick="play('1v1space')" class="button button1">Click this to play 1v1.space!</a> <br>
+<a href="javascript:void(0)" onclick="play('10-minutes-till-dawn')" class="button button1">Click this to play 10 Minutes till dawn!</a> <br>
+<a href="javascript:void(0)" onclick="play('100ng')" class="button button1">Click this to play 100 Player Pong!</a> <br>
+<a href="javascript:void(0)" onclick="play('2048')" class="button button1">Click this to play 2048!</a> <br>
+<a href="javascript:void(0)" onclick="play('2048-multitask')" class="button button1">Click this to play 2048 Multitask!</a> <br>
+<a href="javascript:void(0)" onclick="play('9007199254740992')" class="button button1">Click this to play 9007199254740992!</a> <br>
+<a href="javascript:void(0)" onclick="play('achievementunlocked')" class="button button1">Click this to play Achievement Unlocked!</a> <br>
+<a href="javascript:void(0)" onclick="play('adarkroom')" class="button button1">Click this to play A Dark Room!</a> <br>
+<a href="javascript:void(0)" onclick="play('adrenalinechallenge')" class="button button1">Click this to play Adrenaline Challenge!</a> <br>
+<a href="javascript:void(0)" onclick="play('adventure-drivers')" class="button button1">Click this to play Adventure Drivers!</a> <br>
+<a href="javascript:void(0)" onclick="play('ages-of-conflict')" class="button button1">Click this to play Age of Conflict!</a> <br>
+<a href="javascript:void(0)" onclick="play('alienhominid')" class="button button1">Click this to play Alien Hominid!</a> <br>
+<a href="javascript:void(0)" onclick="play('amidst-the-clouds')" class="button button1">Click this to play Amidst the Clouds!</a> <br>
+<a href="javascript:void(0)" onclick="play('among-us')" class="button button1">Click this to play Among Us!</a> <br>
+<a href="javascript:void(0)" onclick="play('angry-sharks')" class="button button1">Click this to play Angry Sharks!</a> <br>
+<a href="javascript:void(0)" onclick="play('aquapark-slides')" class="button button1">Click this to play Aquapark slides!</a> <br>
+<a href="javascript:void(0)" onclick="play('avalanche')" class="button button1">Click this to play Avalanche!</a> <br>
+<a href="javascript:void(0)" onclick="play('awesometanks2')" class="button button1">Click this to play Awesome Tanks 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('backrooms')" class="button button1">Click this to play Backrooms!</a> <br>
+<a href="javascript:void(0)" onclick="play('bad-ice-cream')" class="button button1">Click this to play Bad Ice Cream!</a> <br>
+<a href="javascript:void(0)" onclick="play('bad-ice-cream-2')" class="button button1">Click this to play Bad Ice Cream 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('bad-ice-cream-3')" class="button button1">Click this to play Bad Ice Cream 3!</a> <br>
+<a href="javascript:void(0)" onclick="play('baldis-basics')" class="button button1">Click this to play Baldi's Basics!</a> <br>
+<a href="javascript:void(0)" onclick="play('ballistic-chickens')" class="button button1">Click this to play Ballistic Chickens!</a> <br>
+<a href="javascript:void(0)" onclick="play('basketball-stars')" class="button button1">Click this to play Basketball Stars
+Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('basketbros-io')" class="button button1">Click this to play Basketbros.io!</a> <br>
+<a href="javascript:void(0)" onclick="play('battleforgondor')" class="button button1">Click this to play Battle for Gondor!</a> <br>
+<a href="javascript:void(0)" onclick="play('bigredbutton')" class="button button1">Click this to play Big Red Button!</a> <br>
+<a href="javascript:void(0)" onclick="play('bitlife')" class="button button1">Click this to play Bitlife!</a> <br>
+<a href="javascript:void(0)" onclick="play('blacholesquare')" class="button button1">Click this to play Black Hole Square!</a> <br>
+<a href="javascript:void(0)" onclick="play('blackknight')" class="button button1">Click this to play Black Knight!</a> <br>
+<a href="javascript:void(0)" onclick="play('bloonstd')" class="button button1">Click this to play Bloons TD!</a> <br>
+<a href="javascript:void(0)" onclick="play('bloonstd2')" class="button button1">Click this to play Bloons TD 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('bloxors')" class="button button1">Click this to play Bloxors!</a> <br>
+<a href="javascript:void(0)" onclick="play('bobtherobber2')" class="button button1">Click this to play Bob the Robber 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('boxhead2play')" class="button button1">Click this to play Box Head!</a> <br>
+<a href="javascript:void(0)" onclick="play('boxing-random')" class="button button1">Click this to play Boxing Random!</a> <br>
+<a href="javascript:void(0)" onclick="play('breakingthebank')" class="button button1">Click this to play Breaking the Bank!</a> <br>
+<a href="javascript:void(0)" onclick="play('btts')" class="button button1">Click this to play Big Tower Tiny Square Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('bntts')" class="button button1">Click this to play Big NEON Tower Tiny Square Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('burger-and-frights')" class="button button1">Click this to play Burger and Frights!</a> <br>
+<a href="javascript:void(0)" onclick="play('cannon-basketball-4')" class="button button1">Click this to play Cannon Basketball 4!</a> <br>
+<a href="javascript:void(0)" onclick="play('canyondefense')" class="button button1">Click this to play Canyon Defense!</a> <br>
+<a href="javascript:void(0)" onclick="play('cars-simulator')" class="button button1">Click this to play Cars Simulator!</a> <br>
+<a href="javascript:void(0)" onclick="play('cell-machine')" class="button button1">Click this to play Cell Machine!</a> <br>
+<a href="javascript:void(0)" onclick="play('champion-island')" class="button button1">Click this to play Champion Island!</a> <br>
+<a href="javascript:void(0)" onclick="play('championarcher')" class="button button1">Click this to play Champion Archer!</a> <br>
+<a href="javascript:void(0)" onclick="play('chill-radio')" class="button button1">Click this to play Chill Radio!</a> <br>
+<a href="javascript:void(0)" onclick="play('chrome-dino')" class="button button1">Click this to play Chrome Dino!</a> <br>
+<a href="javascript:void(0)" onclick="play('circlo')" class="button button1">Click this to play circlO!</a> <br>
+<a href="javascript:void(0)" onclick="play('cluster-rush')" class="button button1">Click this to play Cluster Rush!</a> <br>
+<a href="javascript:void(0)" onclick="play('cnpingpong')" class="button button1">Click this to play Table Tennis Ultimate!</a> <br>
+<a href="javascript:void(0)" onclick="play('connect3')" class="button button1">Click this to play Connect 3!</a> <br>
+<a href="javascript:void(0)" onclick="play('cookie-clicker')" class="button button1">Click this to play Cookie Clicker
+Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('core-ball')" class="button button1">Click this to play Core Ball!</a> <br>
+<a href="javascript:void(0)" onclick="play('craftmine')" class="button button1">Click this to play CraftMine!</a> <br>
+<a href="javascript:void(0)" onclick="play('creativekillchamber')" class="button button1">Click this to play Creative Kill Chamber!</a> <br>
+<a href="javascript:void(0)" onclick="play('crossyroad')" class="button button1">Click this to play Crossy Road!</a> <br>
+<a href="javascript:void(0)" onclick="play('csgo-clicker')" class="button button1">Click this to play CS:GO Clicker!</a> <br>
+<a href="javascript:void(0)" onclick="play('ctr')" class="button button1">Click this to play Cut the Rope!</a> <br>
+<a href="javascript:void(0)" onclick="play('ctr-holiday')" class="button button1">Click this to play Cut the Rope Holiday!</a> <br>
+<a href="javascript:void(0)" onclick="play('ctr-tr')" class="button button1">Click this to play Cut the Rope Time Travel!</a> <br>
+<a href="javascript:void(0)" onclick="play('cubefield')" class="button button1">Click this to play Cubefield!</a> <br>
+<a href="javascript:void(0)" onclick="play('cupcake2048')" class="button button1">Click this to play Cupcake 2048!</a> <br>
+<a href="javascript:void(0)" onclick="play('dante')" class="button button1">Click this to play Dante!</a> <br>
+<a href="javascript:void(0)" onclick="play('deal-or-no-deal')" class="button button1">Click this to play Deal or No Deal!</a> <br>
+<a href="javascript:void(0)" onclick="play('death-run-3d')" class="button button1">Click this to play Death Run 3D!</a> <br>
+<a href="javascript:void(0)" onclick="play('defend-the-tank')" class="button button1">Click this to play Defend the Tank!</a> <br>
+<a href="javascript:void(0)" onclick="play('doctor-acorn2')" class="button button1">Click this to play Doctor Acorn 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('doge2048')" class="button button1">Click this to play Doge 2048!</a> <br>
+<a href="javascript:void(0)" onclick="play('DogeMiner')" class="button button1">Click this to play Doge Miner!</a> <br>
+<a href="javascript:void(0)" onclick="play('doodle-jump')" class="button button1">Click this to play Doodle Jump!</a> <br>
+<a href="javascript:void(0)" onclick="play('doublewires')" class="button button1">Click this to play Double Wires!</a> <br>
+<a href="javascript:void(0)" onclick="play('dragon-vs-bricks')" class="button button1">Click this to play Dragons vs Bricks!</a> <br>
+<a href="javascript:void(0)" onclick="play('draw-the-hill')" class="button button1">Click this to play Draw the Hill!</a> <br>
+<a href="javascript:void(0)" onclick="play('drive-mad')" class="button button1">Click this to play Drive Mad!</a> <br>
+<a href="javascript:void(0)" onclick="play('ducklife1')" class="button button1">Click this to play Duck Life!</a> <br>
+<a href="javascript:void(0)" onclick="play('ducklife2')" class="button button1">Click this to play Duck Life 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('ducklife3')" class="button button1">Click this to play Duck Life 3!</a> <br>
+<a href="javascript:void(0)" onclick="play('ducklife4')" class="button button1">Click this to play Duck Life 4!</a> <br>
+<a href="javascript:void(0)" onclick="play('edge-surf')" class="button button1">Click this to play Edge Let's surf!</a> <br>
+<a href="javascript:void(0)" onclick="play('edgenotfound')" class="button button1">Click this to play Edge Not Found!</a> <br>
+<a href="javascript:void(0)" onclick="play('eel-slap')" class="button button1">Click this to play Eel Slap!</a> <br>
+<a href="javascript:void(0)" onclick="play('elasticman')" class="button button1">Click this to play Elastic Man!</a> <br>
+<a href="javascript:void(0)" onclick="play('endlesswar3')" class="button button1">Click this to play Endless War 3!</a> <br>
+<a href="javascript:void(0)" onclick="play('escapingtheprison')" class="button button1">Click this to play Escaping The Prison!</a> <br>
+<a href="javascript:void(0)" onclick="play('evil-glitch')" class="button button1">Click this to play Evil Glitch!</a> <br>
+<a href="javascript:void(0)" onclick="play('evolution')" class="button button1">Click this to play Evolution!</a> <br>
+<a href="javascript:void(0)" onclick="play('exo')" class="button button1">Click this to play Exo!</a> <br>
+<a href="javascript:void(0)" onclick="play('factoryballs')" class="button button1">Click this to play Factory Balls Forever!</a> <br>
+<a href="javascript:void(0)" onclick="play('fairsquares')" class="button button1">Click this to play Fair Squares!</a> <br>
+<a href="javascript:void(0)" onclick="play('fancypantsadventures')" class="button button1">Click this to play Fancy Pants Adventures!</a> <br>
+<a href="javascript:void(0)" onclick="play('fake-virus')" class="button button1">Click this to play Fake Virus!</a> <br>
+<a href="javascript:void(0)" onclick="play('fireboywatergirlforesttemple')" class="button button1">Click this to play Fireboy and Watergirl!</a> <br>
+<a href="javascript:void(0)" onclick="play('flappy-2048')" class="button button1">Click this to play Flappy 2048!</a> <br>
+<a href="javascript:void(0)" onclick="play('flappybird')" class="button button1">Click this to play Flappy Bird!</a> <br>
+<a href="javascript:void(0)" onclick="play('flashtetris')" class="button button1">Click this to play Flash Tetris!</a> <br>
+<a href="javascript:void(0)" onclick="play('flippy-fish')" class="button button1">Click this to play Flippy Fish!</a> <br>
+<a href="javascript:void(0)" onclick="play('fnaw')" class="button button1">Click this to play Five Nights at Winston's!</a> <br>
+<a href="javascript:void(0)" onclick="play('fridaynightfunkin')" class="button button1">Click this to play Friday Night Funkin'!</a> <br>
+<a href="javascript:void(0)" onclick="play('froggys-battle')" class="button button1">Click this to play Froggy's Battle!</a> <br>
+<a href="javascript:void(0)" onclick="play('fruitninja')" class="button button1">Click this to play Fruit Ninja!</a> <br>
+<a href="javascript:void(0)" onclick="play('frying-nemo')" class="button button1">Click this to play Frying Nemo!</a> <br>
+<a href="javascript:void(0)" onclick="play('game-inside')" class="button button1">Click this to play Game Inside a Game Inside a Game...!</a> <br>
+<a href="javascript:void(0)" onclick="play('generic-fishing-game')" class="button button1">Click this to play Generic Fishing Game!</a> <br>
+<a href="javascript:void(0)" onclick="play('geodash')" class="button button1">Click this to play Geometry Dash (Scratch)!</a> <br>
+<a href="javascript:void(0)" onclick="play('georgeandtheprinter')" class="button button1">Click this to play George and the Printer!</a> <br>
+<a href="javascript:void(0)" onclick="play('getaway-shootout')" class="button button1">Click this to play Getaway Shootout!</a> <br>
+<a href="javascript:void(0)" onclick="play('gimme-the-airpod')" class="button button1">Click this to play Gimme the Airpod!</a> <br>
+<a href="javascript:void(0)" onclick="play('glass-city')" class="button button1">Click this to play Glass City!</a> <br>
+<a href="javascript:void(0)" onclick="play('go-ball')" class="button button1">Click this to play Go Ball!</a> <br>
+<a href="javascript:void(0)" onclick="play('goodnight')" class="button button1">Click this to play GOODNIGHT!</a> <br>
+<a href="javascript:void(0)" onclick="play('google-feud')" class="button button1">Click this to play Google Feud!</a> <br>
+<a href="javascript:void(0)" onclick="play('google-snake')" class="button button1">Click this to play Google Snake!</a> <br>
+<a href="javascript:void(0)" onclick="play('gravity-soccer')" class="button button1">Click this to play Gravity Soccer!</a> <br>
+<a href="javascript:void(0)" onclick="play('greybox')" class="button button1">Click this to play Grey Box Testing!</a> <br>
+<a href="javascript:void(0)" onclick="play('grindcraft')" class="button button1">Click this to play Grind Craft!</a> <br>
+<a href="javascript:void(0)" onclick="play('hackertype')" class="button button1">Click this to play Hacker Typer!</a> <br>
+<a href="javascript:void(0)" onclick="play('handshakes')" class="button button1">Click this to play Handshakes!</a> <br>
+<a href="javascript:void(0)" onclick="play('happy-hop')" class="button button1">Click this to play Happy Hop!</a> <br>
+<a href="javascript:void(0)" onclick="play('hba')" class="button button1">Click this to play Hover Bot Arena!</a> <br>
+<a href="javascript:void(0)" onclick="play('helicopter')" class="button button1">Click this to play Helicopter!</a> <br>
+<a href="javascript:void(0)" onclick="play('hexempire')" class="button button1">Click this to play Hex Empire!</a> <br>
+<a href="javascript:void(0)" onclick="play('HexGL')" class="button button1">Click this to play HexGL!</a> <br>
+<a href="javascript:void(0)" onclick="play('hextris')" class="button button1">Click this to play Hextris!</a> <br>
+<a href="javascript:void(0)" onclick="play('hungry-lamu')" class="button button1">Click this to play Hungry Lamu!</a> <br>
+<a href="javascript:void(0)" onclick="play('idle-breakout')" class="button button1">Click this to play Idle Breakout!</a> <br>
+<a href="javascript:void(0)" onclick="play('idle-shark')" class="button button1">Click this to play Idle Shark!</a> <br>
+<a href="javascript:void(0)" onclick="play('impossiblequiz')" class="button button1">Click this to play Impossible Quiz!</a> <br>
+<a href="javascript:void(0)" onclick="play('interactivebuddy')" class="button button1">Click this to play Interactive Buddy!</a> <br>
+<a href="javascript:void(0)" onclick="play('jetpack-joyride')" class="button button1">Click this to play Jetpack Joyride!</a> <br>
+<a href="javascript:void(0)" onclick="play('just-fall')" class="button button1">Click this to play JustFall.lol!</a> <br>
+<a href="javascript:void(0)" onclick="play('just-one-boss')" class="button button1">Click this to play Just One Boss!</a> <br>
+<a href="javascript:void(0)" onclick="play('kitchen-gun-game')" class="button button1">Click this to play Kitchen gun game!</a> <br>
+<a href="javascript:void(0)" onclick="play('kittencannon')" class="button button1">Click this to play Kitten Cannon!</a> <br>
+<a href="javascript:void(0)" onclick="play('knife-master')" class="button button1">Click this to play Knife Master!</a> <br>
+<a href="javascript:void(0)" onclick="play('krunker')" class="button button1">Click this to play Krunker!</a> <br>
+<a href="javascript:void(0)" onclick="play('learntofly')" class="button button1">Click this to play Learn To Fly!</a> <br>
+<a href="javascript:void(0)" onclick="play('learntofly2')" class="button button1">Click this to play Learn to fly 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('madalin-stunt-cars-2')" class="button button1">Click this to play Madalin Stunt Cars 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('madalin-stunt-cars-3')" class="button button1">Click this to play Madalin Stunt Cars 3!</a> <br>
+<a href="javascript:void(0)" onclick="play('mario')" class="button button1">Click this to play Mario!</a> <br>
+<a href="javascript:void(0)" onclick="play('marvinspectrum')" class="button button1">Click this to play Marvin Spectrum!</a> <br>
+<a href="javascript:void(0)" onclick="play('matrixrampage')" class="button button1">Click this to play Matrix Rampage!</a> <br>
+<a href="javascript:void(0)" onclick="play('meme2048')" class="button button1">Click this to play Meme 2048!</a> <br>
+<a href="javascript:void(0)" onclick="play('merge-round-racers')" class="button button1">Click this to play Merge Round Racers!</a> <br>
+<a href="javascript:void(0)" onclick="play('mineblocks')" class="button button1">Click this to play Mine Blocks!</a> <br>
+<a href="javascript:void(0)" onclick="play('minecraft-15')" class="button button1">Click this to play Eaglercraft 1.5!</a> <br>
+<a href="javascript:void(0)" onclick="play('minecraft-18')" class="button button1">Click this to play Eaglercraft 1.8!</a> <br>
+<a href="javascript:void(0)" onclick="play('minecraft-classic')" class="button button1">Click this to play Minecraft Classic!</a> <br>
+<a href="javascript:void(0)" onclick="play('minecraftbeta')" class="button button1">Click this to play Minecraft Classic Hacks!</a> <br>
+<a href="javascript:void(0)" onclick="play('minesweeper')" class="button button1">Click this to play Minesweeper!</a> <br>
+<a href="javascript:void(0)" onclick="play('miniputt')" class="button button1">Click this to play Mini-putt!</a> <br>
+<a href="javascript:void(0)" onclick="play('missiles')" class="button button1">Click this to play Missiles!</a> <br>
+<a href="javascript:void(0)" onclick="play('motox3m')" class="button button1">Click this to play MotoX3M!</a> <br>
+<a href="javascript:void(0)" onclick="play('motox3m2')" class="button button1">Click this to play MotoX3M 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('motox3m-pool')" class="button button1">Click this to play MotoX3M Pool!</a> <br>
+<a href="javascript:void(0)" onclick="play('motox3m-spooky')" class="button button1">Click this to play MotoX3M Spooky!</a> <br>
+<a href="javascript:void(0)" onclick="play('motox3m-winter')" class="button button1">Click this to play MotoX3M Winter!</a> <br>
+<a href="javascript:void(0)" onclick="play('my-rusty-submarine')" class="button button1">Click this to play My Rusty Submarine!</a> <br>
+<a href="javascript:void(0)" onclick="play('n-gon')" class="button button1">Click this to play n-gon!</a> <br>
+<a href="javascript:void(0)" onclick="play('ninja')" class="button button1">Click this to play Ninja!</a> <br>
+<a href="javascript:void(0)" onclick="play('ninjavsevilcorp')" class="button button1">Click this to play Ninja vs Evil Corp!</a> <br>
+<a href="javascript:void(0)" onclick="play('noob-steve-parkour')" class="button button1">Click this to play Noob Steve Parkour!</a> <br>
+<a href="javascript:void(0)" onclick="play('ns-shaft')" class="button button1">Click this to play NS-Shaft!</a> <br>
+<a href="javascript:void(0)" onclick="play('nsresurgence')" class="button button1">Click this to play Neon Square Resurgence!</a> <br>
+<a href="javascript:void(0)" onclick="play('OfflineParadise')" class="button button1">Click this to play Offline Paradise!</a> <br>
+<a href="javascript:void(0)" onclick="play('om-bounce')" class="button button1">Click this to play Om Nom Bounce!</a> <br>
+<a href="javascript:void(0)" onclick="play('ovo')" class="button button1">Click this to play OvO!</a> <br>
+<a href="javascript:void(0)" onclick="play('pandemic2')" class="button button1">Click this to play Pandemic 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('papasburgeria')" class="button button1">Click this to play Papa's Burgeria!</a> <br>
+<a href="javascript:void(0)" onclick="play('papaspizzaria')" class="button button1">Click this to play Papa's Pizzaria!</a> <br>
+<a href="javascript:void(0)" onclick="play('paperio2')" class="button button1">Click this to play Paper.io 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('papery-planes')" class="button button1">Click this to play Papery Planes!</a> <br>
+<a href="javascript:void(0)" onclick="play('particle-clicker')" class="button button1">Click this to play Particle Clicker!</a> <br>
+<a href="javascript:void(0)" onclick="play('pixel-gun-survival')" class="button button1">Click this to play Pixel Gun Survival!</a> <br>
+<a href="javascript:void(0)" onclick="play('polybranch')" class="button button1">Click this to play PolyBranch!</a> <br>
+<a href="javascript:void(0)" onclick="play('popcat-classic')" class="button button1">Click this to play POPCAT CLASSIC!</a> <br>
+<a href="javascript:void(0)" onclick="play('portalflash')" class="button button1">Click this to play Portal (Flash)!</a> <br>
+<a href="javascript:void(0)" onclick="play('precision-client')" class="button button1">Click this to play Precision Client (Eaglercraft)!</a> <br>
+<a href="javascript:void(0)" onclick="play('protektor')" class="button button1">Click this to play Protektor!</a> <br>
+<a href="javascript:void(0)" onclick="play('push-the-square')" class="button button1">Click this to play Push The Square!</a> <br>
+<a href="javascript:void(0)" onclick="play('push-your-luck')" class="button button1">Click this to play Push Your Luck!</a> <br>
+<a href="javascript:void(0)" onclick="play('rabbit-samurai')" class="button button1">Click this to play Rabbit Samurai!</a> <br>
+<a href="javascript:void(0)" onclick="play('rabbit-samurai2')" class="button button1">Click this to play Rabbit Samurai 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('resent-client')" class="button button1">Click this to play Resent Client (Eaglercraft)!</a> <br>
+<a href="javascript:void(0)" onclick="play('retro-bowl')" class="button button1">Click this to play Retro Bowl Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('riddleschool')" class="button button1">Click this to play Riddle School 1!</a> <br>
+<a href="javascript:void(0)" onclick="play('riddleschool2')" class="button button1">Click this to play Riddle School 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('riddleschool3')" class="button button1">Click this to play Riddle School 3!</a> <br>
+<a href="javascript:void(0)" onclick="play('riddleschool4')" class="button button1">Click this to play Riddle School 4!</a> <br>
+<a href="javascript:void(0)" onclick="play('riddleschool5')" class="button button1">Click this to play Riddle School 5!</a> <br>
+<a href="javascript:void(0)" onclick="play('riddletransfer')" class="button button1">Click this to play Riddle School Transfer 1!</a> <br>
+<a href="javascript:void(0)" onclick="play('riddletransfer2')" class="button button1">Click this to play Riddle School Transfer 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('rolling-forests')" class="button button1">Click this to play Rolling Forests!</a> <br>
+<a href="javascript:void(0)" onclick="play('rolly-vortex')" class="button button1">Click this to play Rolly Vortex!</a> <br>
+<a href="javascript:void(0)" onclick="play('rooftop-snipers')" class="button button1">Click this to play Rooftop Snipers!</a> <br>
+<a href="javascript:void(0)" onclick="play('ruffle')" class="button button1">Click this to play Ruffle Emulator!</a> <br>
+<a href="javascript:void(0)" onclick="play('sandboxels')" class="button button1">Click this to play Sandboxels!</a> <br>
+<a href="javascript:void(0)" onclick="play('santy-is-home')" class="button button1">Click this to play Santy is Home!</a> <br>
+<a href="javascript:void(0)" onclick="play('sand-game')" class="button button1">Click this to play Sand Game!</a> <br>
+<a href="javascript:void(0)" onclick="play('scrapmetal')" class="button button1">Click this to play Scrap Metal 3!</a> <br>
+<a href="javascript:void(0)" onclick="play('shellshockers')" class="button button1">Click this to play Shellshockers!</a> <br>
+<a href="javascript:void(0)" onclick="play('shotinthedark')" class="button button1">Click this to play Shot in the Dark!</a> <br>
+<a href="javascript:void(0)" onclick="play('shuttledeck')" class="button button1">Click this to play SHUTTLEDECK!</a> <br>
+<a href="javascript:void(0)" onclick="play('sky-car-stunt')" class="button button1">Click this to play Sky Car Stunt!</a> <br>
+<a href="javascript:void(0)" onclick="play('sleepingbeauty')" class="button button1">Click this to play Sleeping Beauty!</a> <br>
+<a href="javascript:void(0)" onclick="play('slime-rush-td')" class="button button1">Click this to play Slime Rush TD!</a> <br>
+<a href="javascript:void(0)" onclick="play('slope')" class="button button1">Click this to play Slope Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('slope-2')" class="button button1">Click this to play Slope 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('slope-ball')" class="button button1">Click this to play Slope Ball!</a> <br>
+<a href="javascript:void(0)" onclick="play('sm64')" class="button button1">Click this to play Super Mario 64!</a> <br>
+<a href="javascript:void(0)" onclick="play('smashkarts')" class="button button1">Click this to play Smash Carts!</a> <br>
+<a href="javascript:void(0)" onclick="play('smokingbarrels')" class="button button1">Click this to play Smoking Barrels!</a> <br>
+<a href="javascript:void(0)" onclick="play('snowbattle')" class="button button1">Click this to play Snowbattle!</a> <br>
+<a href="javascript:void(0)" onclick="play('soccer-random')" class="button button1">Click this to play Soccer Random!</a> <br>
+<a href="javascript:void(0)" onclick="play('soccer-skills')" class="button button1">Click this to play Soccer Skills Euro Cup!</a> <br>
+<a href="javascript:void(0)" onclick="play('soldier-legend')" class="button button1">Click this to play Soilder Legend!</a> <br>
+<a href="javascript:void(0)" onclick="play('solitaire')" class="button button1">Click this to play Solitare!</a> <br>
+<a href="javascript:void(0)" onclick="play('sort-the-court')" class="button button1">Click this to play Sort The Court!</a> <br>
+<a href="javascript:void(0)" onclick="play('soundboard')" class="button button1">Click this to play Soundboard!</a> <br>
+<a href="javascript:void(0)" onclick="play('space-company')" class="button button1">Click this to play Space Company!</a> <br>
+<a href="javascript:void(0)" onclick="play('spacegarden')" class="button button1">Click this to play Space Garden!</a> <br>
+<a href="javascript:void(0)" onclick="play('spinningrat')" class="button button1">Click this to play Spinning Rat from spinningrat.online!</a> <br>
+<a href="javascript:void(0)" onclick="play('stack')" class="button button1">Click this to play Stack!</a> <br>
+<a href="javascript:void(0)" onclick="play('stack-bump-3d')" class="button button1">Click this to play Stack Bump 3D!</a> <br>
+<a href="javascript:void(0)" onclick="play('starve')" class="button button1">Click this to play Starve.io!</a> <br>
+<a href="javascript:void(0)" onclick="play('station-141')" class="button button1">Click this to play Station 141!</a> <br>
+<a href="javascript:void(0)" onclick="play('stealingthediamond')" class="button button1">Click this to play Stealing The Diamond!</a> <br>
+<a href="javascript:void(0)" onclick="play('stick-archers')" class="button button1">Click this to play Stick Archers!</a> <br>
+<a href="javascript:void(0)" onclick="play('stick-duel-battle')" class="button button1">Click this to play Stick Duel Battle!</a> <br>
+<a href="javascript:void(0)" onclick="play('stick-merge')" class="button button1">Click this to play Stick Merge!</a> <br>
+<a href="javascript:void(0)" onclick="play('stickman-boost')" class="button button1">Click this to play Stickman Boost!</a> <br>
+<a href="javascript:void(0)" onclick="play('stickman-golf')" class="button button1">Click this to play Stickman Golf!</a> <br>
+<a href="javascript:void(0)" onclick="play('stickman-hook')" class="button button1">Click this to play Stickman Hook!</a> <br>
+<a href="javascript:void(0)" onclick="play('Stickman-Survival')" class="button button1">Click this to play Stickman Survival!</a> <br>
+<a href="javascript:void(0)" onclick="play('stickwar')" class="button button1">Click this to play Stick War!</a> <br>
+<a href="javascript:void(0)" onclick="play('stormthehouse2')" class="button button1">Click this to play Storm The House 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('subway-surfers')" class="button button1">Click this to play Subway Surfers
+Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('subway-surfers-ny')" class="button button1">Click this to play Subway Surfers New York!</a> <br>
+<a href="javascript:void(0)" onclick="play('superhot')" class="button button1">Click this to play Superhot!</a> <br>
+<a href="javascript:void(0)" onclick="play('supermarioconstruct')" class="button button1">Click this to play Super Mario Constuct!</a> <br>
+<a href="javascript:void(0)" onclick="play('surviv')" class="button button1">Click this to play Surviv.io!</a> <br>
+<a href="javascript:void(0)" onclick="play('sushi-unroll')" class="button button1">Click this to play Sushi unROLL!</a> <br>
+<a href="javascript:void(0)" onclick="play('swerve')" class="button button1">Click this to play Swerve!</a> <br>
+<a href="javascript:void(0)" onclick="play('synesthesia')" class="button button1">Click this to play Synesthesia!</a> <br>
+<a href="javascript:void(0)" onclick="play('tactical-weapon-pack-2')" class="button button1">Click this to play Tactical Weapon Pack 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('tacticalassasin2')" class="button button1">Click this to play Tactical Assassin 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('tank-trouble-2')" class="button button1">Click this to play Tank Trouble 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('tanuki-sunset')" class="button button1">Click this to play Tanuki Sunset!</a> <br>
+<a href="javascript:void(0)" onclick="play('temple-run-2')" class="button button1">Click this to play Temple Run 2
+Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('thebattle')" class="button button1">Click this to play The Battle!</a> <br>
+<a href="javascript:void(0)" onclick="play('the-final-earth')" class="button button1">Click this to play The Final Earth!</a> <br>
+<a href="javascript:void(0)" onclick="play('the-hotel')" class="button button1">Click this to play The Hotel!</a> <br>
+<a href="javascript:void(0)" onclick="play('theheist')" class="button button1">Click this to play The Heist!</a> <br>
+<a href="javascript:void(0)" onclick="play('there-is-no-game')" class="button button1">Click this to play There Is No Game!</a> <br>
+<a href="javascript:void(0)" onclick="play('thisistheonlylevel')" class="button button1">Click this to play This Is The Only Level!</a> <br>
+<a href="javascript:void(0)" onclick="play('tiny-fishing')" class="button button1">Click this to play Tiny Fishing!</a> <br>
+<a href="javascript:void(0)" onclick="play('tiny-islands')" class="button button1">Click this to play Tiny Islands!</a> <br>
+<a href="javascript:void(0)" onclick="play('tosstheturtle')" class="button button1">Click this to play Toss The Turtle!</a> <br>
+<a href="javascript:void(0)" onclick="play('townscaper')" class="button button1">Click this to play Townscaper!</a> <br>
+<a href="javascript:void(0)" onclick="play('tube-jumpers')" class="button button1">Click this to play Tube Jumpers!</a> <br>
+<a href="javascript:void(0)" onclick="play('tunnel-rush')" class="button button1">Click this to play Tunnel Rush!</a> <br>
+<a href="javascript:void(0)" onclick="play('tv-static')" class="button button1">Click this to play TV Static!</a> <br>
+<a href="javascript:void(0)" onclick="play('twitch-tetris')" class="button button1">Click this to play Twitch Tetris!</a> <br>
+<a href="javascript:void(0)" onclick="play('veloce')" class="button button1">Click this to play VELOCE!</a> <br>
+<a href="javascript:void(0)" onclick="play('vex3')" class="button button1">Click this to play Vex 3!</a> <br>
+<a href="javascript:void(0)" onclick="play('vex4')" class="button button1">Click this to play Vex 4!</a> <br>
+<a href="javascript:void(0)" onclick="play('vex5')" class="button button1">Click this to play Vex 5!</a> <br>
+<a href="javascript:void(0)" onclick="play('vex6')" class="button button1">Click this to play Vex 6 Hot!</a> <br>
+<a href="javascript:void(0)" onclick="play('vex7')" class="button button1">Click this to play Vex 7!</a> <br>
+<a href="javascript:void(0)" onclick="play('waterworks')" class="button button1">Click this to play Waterworks!!</a> <br>
+<a href="javascript:void(0)" onclick="play('wallsmash')" class="button button1">Click this to play Wall Smash!</a> <br>
+<a href="javascript:void(0)" onclick="play('weavesilk')" class="button button1">Click this to play Weave Silk!</a> <br>
+<a href="javascript:void(0)" onclick="play('webgl-fluid-simulation')" class="button button1">Click this to play WebGL Fluid Sim!</a> <br>
+<a href="javascript:void(0)" onclick="play('webretr')" class="button button1">Click this to play Webretro!</a> <br>
+<a href="javascript:void(0)" onclick="play('win-the-whitehouse')" class="button button1">Click this to play Win the Whitehouse!</a> <br>
+<a href="javascript:void(0)" onclick="play('wolf3d')" class="button button1">Click this to play Wolfenstein 3D!</a> <br>
+<a href="javascript:void(0)" onclick="play('wordle')" class="button button1">Click this to play Wordle!</a> <br>
+<a href="javascript:void(0)" onclick="play('worlds-hardest-game')" class="button button1">Click this to play World's Hardest Game!</a> <br>
+<a href="javascript:void(0)" onclick="play('worlds-hardest-game-2')" class="button button1">Click this to play World's Hardest Game 2!</a> <br>
+<a href="javascript:void(0)" onclick="play('x-trial-racing')" class="button button1">Click this to play X Trial Racing!</a> <br>
+<a href="javascript:void(0)" onclick="play('xx142-b2exe')" class="button button1">Click this to play xx142-b2exe!</a> <br>
+<a href="javascript:void(0)" onclick="play('yoshifabrication')" class="button button1">Click this to play Yoshi's Fabrication Station!</a> <br>
+<a href="javascript:void(0)" onclick="play('you-are-bezos')" class="button button1">Click this to play You Are Jeff Bezos!</a> <br>
+<a href="javascript:void(0)" onclick="play('zombs-royale')" class="button button1">Click this to play Zombs Royale!</a> <br>
+<a href="javascript:void(0)" onclick="embed('Geometry Dash Levels 4-6.html')" class="button button1">Click this to play Geometry Dash Levels 4-6!</a> <br>
+<a href="javascript:void(0)" onclick="embed('Geometry Dash Levels 7-8.html')" class="button button1">Click this to play Geometry Dash Levels 7-8!</a> <br>
+<a href="javascript:void(0)" onclick="embed('Geometry Dash Levels 9-13.html')" class="button button1">Click this to play Geometry Dash Levels 9-13!</a> <br>
+<a href="javascript:void(0)" onclick="embed('Geometry Dash Levels 14-15.html')" class="button button1">Click this to play Geometry Dash Levels 14-15!</a> <br>
+<a href="javascript:void(0)" onclick="embed('Geometry Dash Levels 16-21.html')" class="button button1">Click this to play Geometry Dash Levels 16-21!</a> <br>
+ <a href="javascript:void(0)" onclick="embed('Geometry Dash Meltdown.html')" class="button button1">Click this to play Geometry Dash Meltdown!</a> <br>
+  <a href="javascript:void(0)" onclick="embed('Geometry Dash Subzero.html')" class="button button1">Click this to play Geometry Dash Subzero!</a> <br>
+ <a href="javascript:void(0)" onclick="embed('uv.html')" class="button button1">Click me and go to the url you want in this custom browser!</a> <br>
+</p></h4></div>  <br>
+
+<br><h4 style="color:rgb(138, 55, 0)">_____________________________________________________________________________________________________________________________________________________________________________________________________________________
+ </h4>
+<div style="font-size:0.83127vw;" id="sizesection4">
+<h2 id="Crazystuff">Crazy stuff related:</h2>
+
+<a href="https://drive.google.com/uc?export=download&amp;id=1SwDVFuaWWFDLrfiEaE5e2y1JSNZWeuZ1" class="button button1" target="_blank">Click this to download the free app! (right-click and open in new tab + no adds except for in games)</a>
+
+<h4>Click the subscribe button bellow to subscribe to my channel!</h4>
+
+<iframe ng-non-bindable="" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 103px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" id="I11_1632681252479" name="I11_1632681252479" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=UCY-8pPu48scTorUiUrh3vkQ&amp;layout=default&amp;count=default&amp;origin=https%3A%2F%2Fdevelopers-dot-devsite-v2-prod.appspot.com&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.uAzDleg2hnU.O%2Fam%3DAQ%2Fd%3D1%2Frs%3DAGLTcCMT6b3QcRI88QolvkcdUjC8YnoTvA%2Fm%3D__features__#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh&amp;id=I11_1632681252479&amp;_gfid=I11_1632681252479&amp;parent=https%3A%2F%2Fdevelopers-dot-devsite-v2-prod.appspot.com&amp;pfname=&amp;rpctoken=40820607" data-gapiattached="true" width="100%" frameborder="0"></iframe>
+
+<br>
+
+
+<a class="button button1" href="https://www.youtube.com/channel/UCY-8pPu48scTorUiUrh3vkQ">Click this button to copy the link to go to my youtube channel!</a>
+
+
+<h3>It would really help to subscribe, so that there can be a custom url
+ for the channel. Then more people can play my games! You don't have to 
+though. Thank you!</h3>
+<a target="_blank" href="mailto:crazystuff.xyz@gmail.com?subject=Question&amp;body=Hello!%20I%20have%20a%20simple%20question%20for%20you.%20(put%20question%20here)%0A%0AThank%20you!%0A%0A">If
+ there are any issues, or you have any suggestions, gmail me by clicking
+ this link and put the adress "crazystuff.xyz@gmail.com".</a>
+
+<p style="font-family:arial"><a target="_blank" href="https://photos.google.com/photo/AF1QipOswB0rftLDz8_IzVJO4mRUKhSgSRCMrPslxq7y">Click on the link to see the logo I made!</a></p><br></div><h4 style="color:rgb(138, 55, 0)">_____________________________________________________________________________________________________________________________________________________________________________________________________________________</h4>
+
+<div style="font-size:0.83127vw;" id="sizesection5">
+<h2 id="random">And last but not least, RANDOM STUFF!!!:</h2>
+
+<a target="_blank" href="https://www.youtube.com/embed/hGqGITyjJXI?autoplay=1"><button type="button" onclick="setTimeout(function(){alert('Hahaha get stick rolled')}, 1000);"><p>Click The button</p></button></a>
+
+<h4><p style="font-family:arial"><a target="_blank" href="javascript:void(0)">What will happen if we click this link? ABSOLUTELY NOTHING</a></p></h4>
+
+<h4><p style="font-family:arial"><a target="_blank" href="https://www.youtube.com/watch?v=H_dNnpNe97c">CLICK PLEASE</a></p></h4>
+
+<h4><p style="font-family:arial"><a target="_blank" href="https://www.youtube.com/watch?v=ZZ5LpwO-An4">CLICK FOR $100 DOCUMENT!!!</a></p></h4>
+
+<h4><p style="font-family:arial; color:rgb(115, 70, 2);"><a target="_blank" href="https://www.youtube.com/watch?v=xvFZjo5PgG0">CLICK THIS LINK AND THEN IT WILL REDIRECT YOU TO YOUTUBE VIDEO TO GET A MILLION VBUCKS AND ROBUX PROMO CODES SO YOU CAN TYPE /E FREE!!!</a></p></h4></div><h4 style="color:rgb(115, 70, 2);">_____________________________________________________________________________________________________________________________________________________________________________________________________________________</h4>
+<div style="font-size:0.83127vw;" id="sizesection6">
+<h3><p style="font-family:arial">I would like to say thank you to khan 
+academy for teaching me these skills and to word/microsoft because I 
+made the logo using word. I would also like to say thank you to snip 
+&amp; sketch because I made the logo by taking a screenshot. I would 
+even like to say thank you to google because google technically made the
+ link to the logo. I would finally like to say thank you to <strong>YOU</strong>. <strong>YOU</strong> played with these programs and <strong>YOU</strong>
+ probably liked them and I am happy that you liked them. It fills my 
+heart with joy and it makes me feel like this webpage is worth it. And 
+by the way, thank you for that many visits (above). :-)</p></h3>
+
+<h5><p style="font-family:arial">
+
+
+</p></h5><h4><p style="font-family:arial">The owner, Shayaan Hooda, hopes you have a fantastic 
+day.</p></h4>
+</div>
+<h4 style="color:rgb(115, 70, 2);">_____________________________________________________________________________________________________________________________________________________________________________________________________________________</h4>
+<center>
+<a href="javascript:void(0);" onclick="makeTextBigger();" class="button button1">Click this to make the webpage text bigger!</a>
+<a href="javascript:void(0);" onclick="makeTextSmaller();" class="button button1">Click this to make the webpage text smaller!</a>
+<input id="sizeInput">
+<a href="javascript:void(0);" onclick="setSize();" class="button button1">Click this to make the webpage font size the number you have inputed!</a>
+<br>
+<p><em>Note: the default size is 0.83127. If you want to reset the font,
+ then put the number 0.83127 in the input box and then click on the text
+ that makes the text what number you put in the input box.</em></p>
+</center>
+<script>
+    var body = document.body.innerHTML;
+     if(localStorage.getItem("history") == "none"){
+         document.querySelector("input").onclick = function(){
+         localStorage.setItem("history", "shown");
+          window.top = window.self;
+     };
+     document.querySelector("label").innerHTML = "Click this to show history";
+     }
+    </script>
+</body></html>
