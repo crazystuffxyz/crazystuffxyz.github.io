@@ -29,7 +29,7 @@ function noHistory(){
 
  if(localStorage.getItem("history") == "none"){
      if(window.self == window.top){
-         embed("");
+         embed(location.href);
          location.href="https://google.com";
      }
  }
@@ -578,7 +578,7 @@ day.</p></h4>
      if(localStorage.getItem("history") == "none"){
          document.querySelector("input").onclick = function(){
          localStorage.setItem("history", "shown");
-          window.top = window.self;
+          window.top.location = window.self.location;
      };
      document.querySelector("label").innerHTML = "Click this to show history";
      }
