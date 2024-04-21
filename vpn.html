@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+</head>
+<body>
+  <div id="normal-screen">
+<h1>Very basic vpn</h1>
+<input placeholder="input token here">
+<input placeholder="input url here">
+  <button onclick="go();">Go!</button>
+<br>
+  <br>
+  <p>If you want a token, then please go to <a href="tokens.txt">this link</a>, and copy and paste a token. If none work, please let me know via email :)</p>
+  </div>
+  <div id="vpn-screen">
+<h1>Loading...</h1>
+  </div>
   <script>
 async function registerSW(url, scope, token) {
   if(token){
@@ -44,19 +58,5 @@ async function registerSW(url, scope, token) {
   } else{
     document.querySelector("#vpn-screen").style.display = 'none';
   }</script>
-</head>
-<body>
-  <div id="normal-screen">
-<h1>Very basic vpn</h1>
-<input placeholder="input token here">
-<input placeholder="input url here">
-  <button onclick="go();">Go!</button>
-<br>
-  <br>
-  <p>If you want a token, then please go to <a href="tokens.txt">this link</a>, and copy and paste a token. If none work, please let me know via email :)</p>
-  </div>
-  <div id="vpn-screen">
-<h1>Loading...</h1>
-  </div>
 </body>
 </html>
