@@ -20,14 +20,14 @@ function makeFile(name, contenttype, content){
     var response = await fetch(url);
     var thetext = await response.text();
     console.log(thetext);
-    thetext = await thetext.replace(/theserviceworkerscriptscope/g, self.localStorage.getItem("scopeforyouknow").slice(0, self.localStorage.getItem("scopeforyouknow").length - 1)).replace(/thebareservernodeurl/g, atob(self.localStorage.getItem("tokenforbare")));
+    thetext = await thetext.replace(/theserviceworkerscriptscope/g, self.localStorage.scopeforyouknow.slice(0, self.localStorage.scopeforyouknow.length - 1)).replace(/thebareservernodeurl/g, atob(self.localStorage.tokenforbare));
     return thetext;
     } catch(e){
       return "";
     }
   }
-makeFile(self.localStorage.getItem("scopeforyouknow") + "uv/uv.config.js", "application/javascript", getFromUrl(self.localStorage.getItem("scopeforyouknow") + "vpn/uv.config.js"));
-makeFile(self.localStorage.getItem("scopeforyouknow") + "uv/uv.bundle.js", "application/javascript", getFromUrl(self.localStorage.getItem("scopeforyouknow") + "vpn/uv.bundle.js"));
-makeFile(self.localStorage.getItem("scopeforyouknow") + "uv/uv.handler.js", "application/javascript", getFromUrl(self.localStorage.getItem("scopeforyouknow") + "vpn/uv.config.js"));
-makeFile(self.localStorage.getItem("scopeforyouknow") + "uv/uv.sw.js", "application/javascript", getFromUrl(self.localStorage.getItem("scopeforyouknow") + "vpn/uv.sw.js"));
+makeFile(self.localStorage.scopeforyouknow + "uv/uv.config.js", "application/javascript", getFromUrl(self.localStorage.scopeforyouknow + "vpn/uv.config.js"));
+makeFile(self.localStorage.scopeforyouknow + "uv/uv.bundle.js", "application/javascript", getFromUrl(self.localStorage.scopeforyouknow + "vpn/uv.bundle.js"));
+makeFile(self.localStorage.scopeforyouknow + "uv/uv.handler.js", "application/javascript", getFromUrl(self.localStorage.scopeforyouknow + "vpn/uv.config.js"));
+makeFile(self.localStorage.scopeforyouknow + "uv/uv.sw.js", "application/javascript", getFromUrl(self.localStorage.scopeforyouknow + "vpn/uv.sw.js"));
 });
