@@ -1,5 +1,5 @@
 self.__uv$config = {
-    prefix: 'theserviceworkerscriptscope/service/',
+    prefix: 'theserviceworkerscriptscope/uv/service/',
     bare: 'thebareservernodeurl',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
