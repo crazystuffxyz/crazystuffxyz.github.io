@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+async function registerSW(url, scope, token) {
+  if(token){
+  if (!navigator.serviceWorker) {
+    alert("VPN doesn't work, since your browser doesn't support service workers. Sorry!");
+  }
+  await navigator.serviceWorker.register(url, {
+    token: token,
+    scope: scope,
+  });
+  } else{
+      if (!navigator.serviceWorker) {
+    alert("VPN doesn't work, since your browser doesn't support service workers. Sorry!");
+  }
+  await navigator.serviceWorker.register(url, {
+    scope: scope,
+  });
+  }
+}
+    async function importScriptFromUrl(url){
+      var thefetch = await fetch(url);
+      await eval(thefetch.text());
+    }
+
+    function go(){
+  location.hash = btoa("[" + document.querySelectorAll("input")[0].value + ", " + document.querySelectorAll("input")[1].value + "]");
+  window.location.reload();
+  }
+  if(location.hash != ''){
+    var thearray = eval(atob(location.hash.slice(1)));
+    var url = location.href.replace(location.origin, "");
+    if(!url.endsWith("/")){
+      url += "/";
+    }
+    document.querySelector("#normal-screen").style.display = 'none';
+    registerSW("vpn.sw.js", url, thearray[0]);
+    importScriptFromUrl(url + "uv/uv.bundle.js");
+    importScriptFromUrl(url + "uv/uv.config.js");
+    registerSW("dist/sw.js", __uv$config.prefix, null);
+    location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
+  } else{
+    document.querySelector("#vpn-screen").style.display = 'none';
+  }</script>
+</head>
+<body>
+  <div id="normal-screen">
+<h1>Very basic vpn</h1>
+<input placeholder="input token here">
+<input placeholder="input url here">
+  <button onclick="go();">Go!</button>
+<br>
+  <br>
+  <p>If you want a token, then please go to <a href="tokens.txt">this link</a>, and copy and paste a token. If none work, please let me know via email :)</p>
+  </div>
+  <div id="vpn-screen">
+<h1>Loading...</h1>
+  </div>
+</body>
+</html>
