@@ -45,12 +45,10 @@ async function registerSW(url, scope, token) {
   }
   if(location.hash != ''){
     var thearray = eval(atob(location.hash.slice(1)));
-    var url = location.href.replace(location.origin, "");
-    if(!url.endsWith("/") && !url.endsWith(".html")){
-      url += "/";
-    } else if(url.endsWith(".html")){
-url = "/" + url.split("/").splice(url.split("/").length - 1, 1).join("/") + "/";
-    }
+    var pathname = window.location.pathname;
+
+// Remove the filename and any trailing slashes
+var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
     registerSW("vpn.sw.js", url, thearray[0]);
