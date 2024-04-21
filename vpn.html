@@ -46,8 +46,10 @@ async function registerSW(url, scope, token) {
   if(location.hash != ''){
     var thearray = eval(atob(location.hash.slice(1)));
     var url = location.href.replace(location.origin, "");
-    if(!url.endsWith("/")){
+    if(!url.endsWith("/") && !url.endsWith(".html")){
       url += "/";
+    } else if(url.endsWith(".html")){
+url = "/" + url.split("/").splice(url.split("/").length - 1, 1).join("/") + "/";
     }
     document.querySelector("#normal-screen").style.display = 'none';
     registerSW("vpn.sw.js", url, thearray[0]);
