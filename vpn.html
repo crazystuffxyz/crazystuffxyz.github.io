@@ -51,6 +51,7 @@ async function registerSW(url, scope, token) {
     } else if(url.endsWith(".html")){
 url = "/" + url.split("/").splice(url.split("/").length - 1, 1).join("/") + "/";
     }
+    console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
     registerSW("vpn.sw.js", url, thearray[0]);
     importScriptFromUrl(url + "uv/uv.bundle.js");
