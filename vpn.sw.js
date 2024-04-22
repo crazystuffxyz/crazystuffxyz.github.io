@@ -45,11 +45,12 @@ self.addEventListener('fetch', (event) => {
     const urlParams = new URLSearchParams(url.search);
     console.log(url.search);
 
-    async function serveFile(url) {
+    async function serveFile(urltofetch, urltoserveto) {
         try {
-            const response = await fetch(url);
+            const response = await fetch(urltofetch);
             const text = await response.text();
             const modifiedText = text.replace(/\s/g, 'a');
+          if(url.pathname == urltoserveto)
             return new Response(modifiedText, {
                 status: response.status,
                 statusText: response.statusText,
@@ -65,8 +66,8 @@ self.addEventListener('fetch', (event) => {
         event.respondWith(serveFile(fileUrl));
     }
 
-    serveAndReplaceSpaces(urlParams.get("scope") + "uv/uv.config.js");
-    serveAndReplaceSpaces(urlParams.get("scope") + "uv/uv.bundle.js");
-    serveAndReplaceSpaces(urlParams.get("scope") + "uv/uv.handler.js");
-    serveAndReplaceSpaces(urlParams.get("scope") + "uv/uv.sw.js");
+    serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.config.js", urlParams.get("scope") + "uv/uv.config.js");
+    serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.bundle.js", urlParams.get("scope") + "uv/uv.bundle.js");
+    serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.handler.js", urlParams.get("scope") + "uv/uv.handler.js");
+    serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.sw.js", urlParams.get("scope") + "uv/uv.sw.js");
 });
