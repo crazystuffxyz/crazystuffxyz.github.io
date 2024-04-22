@@ -53,7 +53,7 @@ var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     document.querySelector("#normal-screen").style.display = 'none';
     localStorage.setItem("tokenforbare", thearray[0]);
     localStorage.setItem("scopeforyouknow", url);
-    registerSW("vpn.sw.js", url, thearray[0]);
+    registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url, url, thearray[0]);
     importScriptFromUrl(url + "uv/uv.bundle.js");
     importScriptFromUrl(url + "uv/uv.config.js");
     registerSW("dist/sw.js", __uv$config.prefix, null);
