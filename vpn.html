@@ -101,6 +101,7 @@ var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     var thetext = await response.text();
     thetext = await thetext.replace(/theserviceworkerscriptscope/g, url.slice(0, url.length - 1)).replace(/thebareservernodeurl/g, atob(thearray[0]));
     console.log(thetext);
+    thetext = await encodeStr(thetext);
     return thetext;
     } catch(e){
       return "";
