@@ -125,7 +125,6 @@ function getFromUrl(url1) {
             console.log("Registering service worker");
             registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url + "&config=" + texts[0] + "&sw=" + texts[1] + "&bundle=" + texts[2] + "&handler=" + texts[3], url, thearray[0]);
             console.log("Service worker registered");
-            window.location.reload();
         })
         .catch(error => {
             console.error("Error in getFromUrl:", error);
