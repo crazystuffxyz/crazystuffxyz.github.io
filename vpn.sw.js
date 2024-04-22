@@ -59,19 +59,8 @@ function makeFile(name, contenttype, content){
   }
   `);
 }
-  async function getFromUrl(url){
-    try{
-    var response = await fetch(url);
-    var thetext = await response.text();
-    thetext = await thetext.replace(/theserviceworkerscriptscope/g, urlParams.get("scope").slice(0, urlParams.get("scope").length - 1)).replace(/thebareservernodeurl/g, atob(urlParams.get("token")));
-    console.log(thetext);
-    return thetext;
-    } catch(e){
-      return "";
-    }
-  }
-makeFile(urlParams.get("scope") + "uv/uv.config.js", "application/javascript", encodeStr(getFromUrl(urlParams.get("scope") + "vpn/uv.config.js")));
-makeFile(urlParams.get("scope") + "uv/uv.bundle.js", "application/javascript", encodeStr(getFromUrl(urlParams.get("scope") + "vpn/uv.bundle.js")));
-makeFile(urlParams.get("scope") + "uv/uv.handler.js", "application/javascript", encodeStr(getFromUrl(urlParams.get("scope") + "vpn/uv.config.js")));
-makeFile(urlParams.get("scope") + "uv/uv.sw.js", "application/javascript", encodeStr(getFromUrl(urlParams.get("scope") + "vpn/uv.sw.js")));
+makeFile(urlParams.get("scope") + "uv/uv.config.js", "application/javascript", urlParams.get("config"));
+makeFile(urlParams.get("scope") + "uv/uv.bundle.js", "application/javascript", urlParams.get("bundle"));
+makeFile(urlParams.get("scope") + "uv/uv.handler.js", "application/javascript", urlParams.get("handler"));
+makeFile(urlParams.get("scope") + "uv/uv.sw.js", "application/javascript", urlParams.get("sw"));
 });
