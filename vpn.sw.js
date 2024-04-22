@@ -1,5 +1,7 @@
 self.addEventListener('fetch', (event) => {
 const url = new URL(event.request.url);
+const urlParams = new URLSearchParams(location.search);
+console.log(location.search);
 function makeFile(name, contenttype, content){
   eval(`
   if (url.pathname === '` + name + `') {
