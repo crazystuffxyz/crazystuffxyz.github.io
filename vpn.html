@@ -93,8 +93,6 @@ async function registerSW(url, scope, token) {
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
-    localStorage.setItem("tokenforbare", thearray[0]);
-    localStorage.setItem("scopeforyouknow", url);
       async function getFromUrl(url){
     try{
     var response = await fetch(url);
