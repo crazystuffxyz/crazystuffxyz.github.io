@@ -93,45 +93,7 @@ async function registerSW(url, scope, token) {
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
-function getFromUrl(url1) {
-    console.log("Starting getFromUrl function");
-    var promises = url1.map(url => {
-        return fetch(url)
-            .then(response => {
-                console.log("Fetched from URL:", url);
-                return response.text();
-            })
-            .then(text => {
-                console.log("Response text:", text);
-                return text.replace(/theserviceworkerscriptscope/g, url.slice(0, url.length - 1)).replace(/thebareservernodeurl/g, atob(thearray[0]));
-            })
-            .then(modifiedText => {
-                console.log("Modified text:", modifiedText);
-                return encodeStr(modifiedText);
-            })
-            .then(encodedText => {
-                console.log("Encoded text:", encodedText);
-                return encodedText;
-            })
-            .catch(error => {
-                console.error("Error fetching from URL:", url, error);
-                return "";
-            });
-    });
-
-    return Promise.all(promises)
-        .then(texts => {
-            console.log("All fetches completed successfully");
-            console.log("Registering service worker");
-            registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url + "&config=" + texts[0] + "&sw=" + texts[1] + "&bundle=" + texts[2] + "&handler=" + texts[3], url, thearray[0]);
-            console.log("Service worker registered");
-        })
-        .catch(error => {
-            console.error("Error in getFromUrl:", error);
-            return "";
-        });
-}
-    getFromUrl([url + "vpn/uv.config.js", url + "vpn/uv.sw.js", url + "vpn/uv.bundle.js", url + "vpn/uv.handler.js"]);
+    registerSW("vpn.sw.js?scope=" + url + "&token=" + atob(thearray[0]), url, thearray[0])
     importScriptFromUrl(url + "uv/uv.bundle.js");
     importScriptFromUrl(url + "uv/uv.config.js");
     registerSW("dist/sw.js", __uv$config.prefix, null);
