@@ -22,14 +22,14 @@ function makeFile(name, contenttype, content){
     var response = await fetch(url);
     var thetext = await response.text();
     console.log(thetext);
-    thetext = await thetext.replace(/theserviceworkerscriptscope/g, self.localStorage.scopeforyouknow.slice(0, urlParams.scope.length - 1)).replace(/thebareservernodeurl/g, atob(urlParams.token));
+    thetext = await thetext.replace(/theserviceworkerscriptscope/g, urlParams.scope.slice(0, urlParams.scope.length - 1)).replace(/thebareservernodeurl/g, atob(urlParams.token));
     return thetext;
     } catch(e){
       return "";
     }
   }
-makeFile(self.localStorage.scopeforyouknow + "uv/uv.config.js", "application/javascript", getFromUrl(self.localStorage.scopeforyouknow + "vpn/uv.config.js"));
-makeFile(self.localStorage.scopeforyouknow + "uv/uv.bundle.js", "application/javascript", getFromUrl(self.localStorage.scopeforyouknow + "vpn/uv.bundle.js"));
-makeFile(self.localStorage.scopeforyouknow + "uv/uv.handler.js", "application/javascript", getFromUrl(self.localStorage.scopeforyouknow + "vpn/uv.config.js"));
-makeFile(self.localStorage.scopeforyouknow + "uv/uv.sw.js", "application/javascript", getFromUrl(self.localStorage.scopeforyouknow + "vpn/uv.sw.js"));
+makeFile(urlParams.scope + "uv/uv.config.js", "application/javascript", getFromUrl(urlParams.scope + "vpn/uv.config.js"));
+makeFile(urlParams.scope + "uv/uv.bundle.js", "application/javascript", getFromUrl(urlParams.scope + "vpn/uv.bundle.js"));
+makeFile(urlParams.scope + "uv/uv.handler.js", "application/javascript", getFromUrl(urlParams.scope + "vpn/uv.config.js"));
+makeFile(urlParams.scope + "uv/uv.sw.js", "application/javascript", getFromUrl(urlParams.scope + "vpn/uv.sw.js"));
 });
