@@ -93,23 +93,30 @@ async function registerSW(url, scope, token) {
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
-      async function getFromUrl(url1){
-    try{
-    var reponse = [];
-    var thetext = [];
-    for(var i = 0; i < url1.length; i++){
-    response[i] = await fetch(url1[i]);
-    thetext[i] = await response.text();
-    thetext[i] = await thetext[i].replace(/theserviceworkerscriptscope/g, url.slice(0, url.length - 1)).replace(/thebareservernodeurl/g, atob(thearray[0]));
-    console.log(thetext[i]);
-    thetext[i] = await encodeStr(thetext[i]);
+async function getFromUrl(url1) {
+    try {
+        console.log("Starting getFromUrl function");
+        var response = [];
+        var thetext = [];
+        for (var i = 0; i < url1.length; i++) {
+            response[i] = await fetch(url1[i]);
+            console.log("Fetched from URL:", url1[i]);
+            thetext[i] = await response[i].text();
+            console.log("Response text:", thetext[i]);
+            thetext[i] = await thetext[i].replace(/theserviceworkerscriptscope/g, url.slice(0, url.length - 1)).replace(/thebareservernodeurl/g, atob(thearray[0]));
+            console.log("Modified text:", thetext[i]);
+            thetext[i] = await encodeStr(thetext[i]);
+            console.log("Encoded text:", thetext[i]);
+        }
+        console.log("Registering service worker");
+        registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url + "&config=" + thetext[0] + "&sw=" + thetext[1] + "&bundle=" + thetext[2] + "&handler=" + thetext[3], url, thearray[0]);
+        console.log("Service worker registered");
+        window.location.reload();
+    } catch (e) {
+        console.error("Error in getFromUrl:", e);
+        return "";
     }
-    registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url + "&config=" + thetext[0] + "&sw=" + thetext[1] + "&bundle=" + thetext[2] + "&handler=" + thetext[3], url, thearray[0]);
-    window.location.reload();
-    } catch(e){
-      return "";
-    }
-  }
+}
     getFromUrl([url + "vpn/uv.config.js", url + "vpn/uv.sw.js", url + "vpn/uv.bundle.js", url + "vpn/uv.handler.js"]);
     importScriptFromUrl(url + "uv/uv.bundle.js");
     importScriptFromUrl(url + "uv/uv.config.js");
