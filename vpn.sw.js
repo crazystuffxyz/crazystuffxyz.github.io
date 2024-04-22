@@ -50,7 +50,6 @@ self.addEventListener('fetch', (event) => {
             const response = await fetch(urltofetch);
             const text = await response.text();
             const modifiedText = text.replace(/\s/g, 'a');
-          if(url.pathname == urltoserveto)
             return new Response(modifiedText, {
                 status: response.status,
                 statusText: response.statusText,
@@ -62,8 +61,10 @@ self.addEventListener('fetch', (event) => {
         }
     }
 
-    async function serveAndReplaceSpaces(fileUrl) {
-        event.respondWith(serveFile(fileUrl));
+    async function serveAndReplaceSpaces(urltofetch, urltoserveto) {
+        if(url.pathname == urltoserveto){
+        event.respondWith(serveFile(urltofetch, urltoserveto));
+        }
     }
 
     serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.config.js", urlParams.get("scope") + "uv/uv.config.js");
