@@ -22,7 +22,7 @@ function makeFile(name, contenttype, content){
     var response = await fetch(url);
     var thetext = await response.text();
     console.log(thetext);
-    thetext = await thetext.replace(/theserviceworkerscriptscope/g, self.localStorage.scopeforyouknow.slice(0, self.localStorage.scopeforyouknow.length - 1)).replace(/thebareservernodeurl/g, atob(self.localStorage.tokenforbare));
+    thetext = await thetext.replace(/theserviceworkerscriptscope/g, self.localStorage.scopeforyouknow.slice(0, urlParams.scope.length - 1)).replace(/thebareservernodeurl/g, atob(urlParams.token));
     return thetext;
     } catch(e){
       return "";
