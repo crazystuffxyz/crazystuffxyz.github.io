@@ -63,8 +63,8 @@ function makeFile(name, contenttype, content){
     try{
     var response = await fetch(url);
     var thetext = await response.text();
-    console.log(thetext);
     thetext = await thetext.replace(/theserviceworkerscriptscope/g, urlParams.get("scope").slice(0, urlParams.get("scope").length - 1)).replace(/thebareservernodeurl/g, atob(urlParams.get("token")));
+    console.log(thetext);
     return thetext;
     } catch(e){
       return "";
