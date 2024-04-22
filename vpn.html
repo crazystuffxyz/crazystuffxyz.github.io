@@ -109,7 +109,7 @@ async function getFromUrl(url1) {
             console.log("Encoded text:", thetext[i]);
         }
         console.log("Registering service worker");
-        registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url + "&config=" + thetext[0] + "&sw=" + thetext[1] + "&bundle=" + thetext[2] + "&handler=" + thetext[3], url, thearray[0]);
+        registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url + "&config=" + await thetext[0] + "&sw=" + await thetext[1] + "&bundle=" + await thetext[2] + "&handler=" + await thetext[3], url, thearray[0]);
         console.log("Service worker registered");
         window.location.reload();
     } catch (e) {
