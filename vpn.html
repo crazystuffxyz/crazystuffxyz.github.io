@@ -95,17 +95,22 @@ var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     document.querySelector("#normal-screen").style.display = 'none';
       async function getFromUrl(url){
     try{
-    var response = await fetch(url);
-    var thetext = await response.text();
-    thetext = await thetext.replace(/theserviceworkerscriptscope/g, url.slice(0, url.length - 1)).replace(/thebareservernodeurl/g, atob(thearray[0]));
-    console.log(thetext);
-    thetext = await encodeStr(thetext);
-    return thetext;
+    var reponse = [];
+    var thetext = [];
+    for(var i = 0; i < url.length; i++){
+    response[i] = await fetch(url);
+    thetext[i] = await response.text();
+    thetext[i] = await thetext[i].replace(/theserviceworkerscriptscope/g, url.slice(0, url.length - 1)).replace(/thebareservernodeurl/g, atob(thearray[0]));
+    console.log(thetext[i]);
+    thetext[i] = await encodeStr(thetext[i]);
+    }
+    registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url + "&config=" + thetext[0] + "&sw=" + thetext[1] + "&bundle=" + thetext[2] + "&handler=" + thetext[3], url, thearray[0]);
+    window.location.reload();
     } catch(e){
       return "";
     }
   }
-    registerSW("vpn.sw.js?token=" + thearray[0] + "&scope=" + url + "&config=" + getFromUrl(url + "vpn/uv.config.js") + "&sw=" + getFromUrl(url + "vpn/uv.sw.js") + "&bundle=" + getFromUrl(url + "vpn/uv.bundle.js") + "&handler=" + getFromUrl(url + "vpn/uv.handler.js"), url, thearray[0]);
+    getFromUrl([url + "vpn/uv.config.js", url + "vpn/uv.sw.js", url + "vpn/uv.bundle.js", url + "vpn/uv.handler.js"]);
     importScriptFromUrl(url + "uv/uv.bundle.js");
     importScriptFromUrl(url + "uv/uv.config.js");
     registerSW("dist/sw.js", __uv$config.prefix, null);
