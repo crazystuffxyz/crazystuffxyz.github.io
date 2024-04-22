@@ -93,12 +93,12 @@ async function registerSW(url, scope, token) {
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
-      async function getFromUrl(url){
+      async function getFromUrl(url1){
     try{
     var reponse = [];
     var thetext = [];
-    for(var i = 0; i < url.length; i++){
-    response[i] = await fetch(url);
+    for(var i = 0; i < url1.length; i++){
+    response[i] = await fetch(url1[i]);
     thetext[i] = await response.text();
     thetext[i] = await thetext[i].replace(/theserviceworkerscriptscope/g, url.slice(0, url.length - 1)).replace(/thebareservernodeurl/g, atob(thearray[0]));
     console.log(thetext[i]);
