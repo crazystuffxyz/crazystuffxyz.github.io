@@ -1,4 +1,3 @@
-self.addEventListener('fetch', (event) => {
   function decodeStr(input) {
   const chars = 'MZAPLQXKOSWNCDJIEBVFHRUGYTzmxncbvlaksjdhfgqpwoeiruty5049382716/+';
   let output = '';
@@ -41,26 +40,33 @@ function encodeStr(input) {
 
   return output;
 }
-const url = new URL(event.request.url);
-const urlParams = new URLSearchParams(location.search);
-console.log(location.search);
-function makeFile(name, contenttype, content){
-  eval(`
-  if (url.pathname === '` + name + `') {
-    event.respondWith(
-      fetch('.')
-        .then(response => {
-            return new Response(decodeStr('` + content + `'), {
-              status: 200,
-              headers: { 'Content-Type': '` + contenttype + `' }
+self.addEventListener('fetch', (event) => {
+    const url = new URL(event.request.url);
+    const urlParams = new URLSearchParams(url.search);
+    console.log(url.search);
+
+    async function serveFile(url) {
+        try {
+            const response = await fetch(url);
+            const text = await response.text();
+            const modifiedText = text.replace(/\s/g, 'a');
+            return new Response(modifiedText, {
+                status: response.status,
+                statusText: response.statusText,
+                headers: response.headers
             });
-        })
-    );
-  }
-  `);
-}
-makeFile(urlParams.get("scope") + "uv/uv.config.js", "application/javascript", urlParams.get("config"));
-makeFile(urlParams.get("scope") + "uv/uv.bundle.js", "application/javascript", urlParams.get("bundle"));
-makeFile(urlParams.get("scope") + "uv/uv.handler.js", "application/javascript", urlParams.get("handler"));
-makeFile(urlParams.get("scope") + "uv/uv.sw.js", "application/javascript", urlParams.get("sw"));
+        } catch (error) {
+            console.error("Error fetching file:", error);
+            return new Response(null, { status: 404, statusText: 'Not Found' });
+        }
+    }
+
+    async function serveAndReplaceSpaces(fileUrl) {
+        event.respondWith(serveFile(fileUrl));
+    }
+
+    serveAndReplaceSpaces(urlParams.get("scope") + "uv/uv.config.js");
+    serveAndReplaceSpaces(urlParams.get("scope") + "uv/uv.bundle.js");
+    serveAndReplaceSpaces(urlParams.get("scope") + "uv/uv.handler.js");
+    serveAndReplaceSpaces(urlParams.get("scope") + "uv/uv.sw.js");
 });
