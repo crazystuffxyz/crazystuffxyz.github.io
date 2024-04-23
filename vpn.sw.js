@@ -3,10 +3,12 @@ self.addEventListener('fetch', function(event) {
   var currenturl = event.request.referrer;
   var scope = atob(url.get("scope"));
   var token = atob(url.get("token"));
+  var originalResponse;
   if (event.request.url.includes(scope + 'uv/uv.')) {
     event.respondWith(
       fetch(scope + currenturl.replace(location.origin + scope, "").replace("uv/", "vpn/"))
         .then(function(response) {
+          originalResponse = response;
           return response.text(); // return the promise here
         })
         .then(function(text) {
@@ -16,7 +18,7 @@ self.addEventListener('fetch', function(event) {
           // Create a new Response object with the fetched content
           return new Response(thetext, {
             headers: {
-              'Content-Type': response.headers.get('Content-Type') // response is not defined here, you should use the content type you expect
+              'Content-Type': originalResponse.headers.get('Content-Type')
             }
           });
         })
