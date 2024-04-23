@@ -16,17 +16,11 @@
 <h1>Loading...</h1>
   </div>
   <script>
-    function setLoadingScreen(text){
-      document.querySelectorAll("h1")[1].innerText = text;
-    }
     function unregisterAllServiceWorkers(){
-  localStorage.setItem("cleared", true);
-  localStorage.setItem("registered", false);
-  window.location.reload();
 navigator.serviceWorker.getRegistrations().then(registrations => {
     for (const registration of registrations) {
         registration.unregister();
-    }
+    } 
 });
   }
       function decodeStr(input) {
@@ -88,13 +82,6 @@ async function registerSW(url, scope, token) {
     scope: scope,
   });
   }
-  if(!(localStorage.getItem("registered"))){
-  localStorage.setItem("registered", true);
-  window.location.reload();
-  } else{
-    localStorage.setItem("cleared", false);
-    location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
-  }
 }
     async function importScriptFromUrl(url){
       var thefetch = await fetch(url);
@@ -113,34 +100,11 @@ async function registerSW(url, scope, token) {
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
-    if(!(localStorage.getItem("cleared"))){
-    setLoadingScreen("Clearing service workers...");
-    unregisterAllServiceWorkers();
-    } else{
-    if(!(localStorage.getItem("registered"))){
-    setLoadingScreen("Creating VPN Server...");
     registerSW("vpn.sw.js?scope=" + btoa(url) + "&token=" + thearray[0], url, thearray[0]);
-    } else{
-      setLoadingScreen("Connecting...");
-const bundleScript = document.createElement('script');
-bundleScript.src = url + "uv/uv.bundle.js";
-bundleScript.onload = () => {
-  const configScript = document.createElement('script');
-  configScript.src = url + "uv/uv.config.js";
-  configScript.onload = () => {
+    importScriptFromUrl(url + "uv/uv.bundle.js");
+    importScriptFromUrl(url + "uv/uv.config.js");
     registerSW("dist.sw.js", __uv$config.prefix, null);
-  };
-  configScript.onerror = error => {
-    alert('Error loading the config script:', error);
-  };
-  document.body.appendChild(configScript);
-};
-bundleScript.onerror = error => {
-  alert('Error loading the bundle script:', error);
-};
-document.body.appendChild(bundleScript);
-    }
-    }
+    location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
   } else{
     document.querySelector("#vpn-screen").style.display = 'none';
   }</script>
