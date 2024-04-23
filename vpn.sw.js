@@ -8,13 +8,11 @@ self.addEventListener('fetch', function(event) {
     event.respondWith(
       fetch(scope + currenturl.replace(location.origin + scope, "").replace("uv/", "vpn/"))
         .then(function(response) {
-          console.log(scope + currenturl.replace(location.origin + scope, "").replace("uv/", "vpn/"));
           originalResponse = response;
           return response.text(); // return the promise here
         })
         .then(function(text) {
           var thetext = text;
-          console.log(thetext);
           thetext = thetext.replace(/theserviceworkerscriptscope/g, scope.slice(0, scope.length - 1)).replace(/thebareservernodeurl/g, token);
           // Create a new Response object with the fetched content
           return new Response(thetext, {
