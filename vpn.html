@@ -1,6 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+  function importTheThing(){
+const bundleScript = document.createElement('script');
+bundleScript.src = url + "uv/uv.bundle.js";
+bundleScript.onload = () => {
+  try{
+  const configScript = document.createElement('script');
+  configScript.src = url + "uv/uv.config.js";
+  configScript.onload = () => {
+    try{
+    localStorage.setItem("first", false);
+    registerSW("dist.sw.js", __uv$config.prefix, null);
+    } catch(e){
+      alert(e.message);
+    }
+  };
+  configScript.onerror = error => {
+    alert('Error loading the config script:', error);
+  };
+  document.body.appendChild(configScript);
+  } catch(e){
+alert(e.message);
+}
+};
+bundleScript.onerror = error => {
+  alert('Error loading the bundle script:', error);
+};
+document.body.appendChild(bundleScript);
+}
+</script>
 </head>
 <body>
   <div id="normal-screen">
@@ -85,32 +115,6 @@ async function registerSW(url, scope, token) {
   if(localStorage.getItem("first")){
     try{
     alert("ye");
-const bundleScript = document.createElement('script');
-bundleScript.src = url + "uv/uv.bundle.js";
-bundleScript.onload = () => {
-  try{
-  const configScript = document.createElement('script');
-  configScript.src = url + "uv/uv.config.js";
-  configScript.onload = () => {
-    try{
-    localStorage.setItem("first", false);
-    registerSW("dist.sw.js", __uv$config.prefix, null);
-    } catch(e){
-      alert(e.message);
-    }
-  };
-  configScript.onerror = error => {
-    alert('Error loading the config script:', error);
-  };
-  document.body.appendChild(configScript);
-  } catch(e){
-alert(e.message);
-}
-};
-bundleScript.onerror = error => {
-  alert('Error loading the bundle script:', error);
-};
-document.body.appendChild(bundleScript);
     } catch(e){
 alert(e.message);
 }
