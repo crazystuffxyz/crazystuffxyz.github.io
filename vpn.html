@@ -79,7 +79,6 @@
             await setLoadingScreen("Creating VPN Server...");
             await registerSW("vpn.sw.js?scope=" + btoa(baseUrl) + "&token=" + token, baseUrl, token);
           } else {
-            location.href = baseUrl + "uv/uv.bundle.js";
             await importScriptFromUrl(baseUrl + "uv/uv.bundle.js");
             await importScriptFromUrl(baseUrl + "uv/uv.config.js");
             await setLoadingScreen("Connecting...");
