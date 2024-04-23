@@ -3,32 +3,17 @@
 <head>
 <script>
   function importTheThing(){
-const bundleScript = document.createElement('script');
-bundleScript.src = url + "uv/uv.bundle.js";
-bundleScript.onload = () => {
-  try{
-  const configScript = document.createElement('script');
-  configScript.src = url + "uv/uv.config.js";
-  configScript.onload = () => {
-    try{
-    localStorage.setItem("first", false);
-    registerSW("dist.sw.js", __uv$config.prefix, null);
-    } catch(e){
-      alert(e.message);
-    }
-  };
-  configScript.onerror = error => {
-    alert('Error loading the config script:', error);
-  };
-  document.body.appendChild(configScript);
-  } catch(e){
-alert(e.message);
-}
-};
-bundleScript.onerror = error => {
-  alert('Error loading the bundle script:', error);
-};
-document.body.appendChild(bundleScript);
+fetch(url + "uv/uv.bundle.js")
+    .then(x => x.text())
+    .then(y => {
+      eval(y);
+      fetch(url + "uv/uv.config.js")
+    .then(z => z.text())
+    .then(a => {
+      eval(a);
+      registerSW("dist.sw.js", __uv$config.prefix, null);
+    });
+    });
 }
 </script>
 </head>
