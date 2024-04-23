@@ -4,128 +4,92 @@
 </head>
 <body>
   <div id="normal-screen">
-<h1>Very basic vpn</h1>
-<input placeholder="input token here">
-<input placeholder="input url here">
-  <button onclick="go();">Go!</button>
-<br>
-  <br>
-  <p>If you want a token, then please go to <a href="tokens.txt">this link</a>, and copy and paste a token. If none work, please let me know via email :)</p>
+    <h1>Very basic VPN</h1>
+    <input placeholder="Input token here">
+    <input placeholder="Input URL here">
+    <button onclick="go();">Go!</button>
+    <br><br>
+    <p>If you want a token, please go to <a href="tokens.txt">this link</a>, and copy and paste a token. If none work, please let me know via email :)</p>
   </div>
   <div id="vpn-screen">
-<h1>Loading...</h1>
+    <h1>Loading...</h1>
   </div>
+
   <script>
-    function setLoadingScreen(text){
+    async function setLoadingScreen(text) {
       document.querySelectorAll("h1")[1].innerText = text;
     }
-    function unregisterAllServiceWorkers(){
-navigator.serviceWorker.getRegistrations().then(registrations => {
-    for (const registration of registrations) {
-        registration.unregister();
+
+    async function unregisterAllServiceWorkers() {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const registration of registrations) {
+        await registration.unregister();
+      }
+      localStorage.setItem("cleared", true);
+      window.location.reload();
     }
-  localStorage.setItem("cleared", true);
-  window.location.reload();
-});
-  }
-      function decodeStr(input) {
-  const chars = 'MZAPLQXKOSWNCDJIEBVFHRUGYTzmxncbvlaksjdhfgqpwoeiruty5049382716/+';
-  let output = '';
-  let i = 0;
 
-  input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');
+    async function go() {
+      const token = document.querySelectorAll("input")[0].value;
+      const url = document.querySelectorAll("input")[1].value;
+      location.hash = btoa(JSON.stringify([token, url]));
+      window.location.reload();
+    }
 
-  while (i < input.length) {
-    const index1 = chars.indexOf(input.charAt(i++));
-    const index2 = chars.indexOf(input.charAt(i++));
-    const index3 = chars.indexOf(input.charAt(i++));
-    const index4 = chars.indexOf(input.charAt(i++));
-    const a = (index1 << 2) | (index2 >> 4);
-    const b = ((index2 & 15) << 4) | (index3 >> 2);
-    const c = ((index3 & 3) << 6) | index4;
-
-    output += String.fromCharCode(a);
-    if (index3 !== 64) output += String.fromCharCode(b);
-    if (index4 !== 64) output += String.fromCharCode(c);
-  }
-
-  return output;
-}
-function encodeStr(input) {
-  const chars = 'MZAPLQXKOSWNCDJIEBVFHRUGYTzmxncbvlaksjdhfgqpwoeiruty5049382716/+';
-  let output = '';
-  let i = 0;
-
-  while (i < input.length) {
-    const a = input.charCodeAt(i++);
-    const b = input.charCodeAt(i++);
-    const c = input.charCodeAt(i++);
-    const index1 = a >> 2;
-    const index2 = ((a & 3) << 4) | (b >> 4);
-    const index3 = isNaN(b) ? 64 : ((b & 15) << 2) | (c >> 6);
-    const index4 = isNaN(c) ? 64 : c & 63;
-
-    output += chars.charAt(index1) + chars.charAt(index2) + chars.charAt(index3) + chars.charAt(index4);
-  }
-
-  return output;
-}
-async function registerSW(url, scope, token) {
-  if(token){
-  if (!navigator.serviceWorker) {
-    alert("VPN doesn't work, since your browser doesn't support service workers. Sorry!");
-  }
-  await navigator.serviceWorker.register(url, {
-    token: token,
-    scope: scope,
-  });
-  } else{
+    async function registerSW(url, scope, token) {
       if (!navigator.serviceWorker) {
-    alert("VPN doesn't work, since your browser doesn't support service workers. Sorry!");
-  }
-  await navigator.serviceWorker.register(url, {
-    scope: scope,
-  });
-  }
-  if(!(localStorage.getItem("registered"))){
-  localStorage.setItem("registered", true);
-  window.location.reload();
-  }
-}
-    async function importScriptFromUrl(url){
-      var thefetch = await fetch(url);
-      await eval(thefetch.text());
+        alert("VPN doesn't work, since your browser doesn't support service workers. Sorry!");
+        return;
+      }
+      const registrationOptions = {
+        scope: scope
+      };
+      if (token) {
+        registrationOptions.token = token;
+      }
+      await navigator.serviceWorker.register(url, registrationOptions);
+      if (!localStorage.getItem("registered")) {
+        localStorage.setItem("registered", true);
+        window.location.reload();
+      }
     }
 
-    function go(){
-  location.hash = btoa("['" + document.querySelectorAll("input")[0].value + "', '" + document.querySelectorAll("input")[1].value + "']");
-  window.location.reload();
-  }
-  if(location.hash != ''){
-    var thearray = eval(atob(location.hash.slice(1)));
-    var pathname = window.location.pathname;
+    async function importScriptFromUrl(url) {
+      const response = await fetch(url);
+      const scriptText = await response.text();
+      eval(scriptText);
+    }
 
-// Remove the filename and any trailing slashes
-var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
-    console.log(url);
-    document.querySelector("#normal-screen").style.display = 'none';
-    if(!(localStorage.getItem("cleared"))){
-    setLoadingScreen("Clearing service workers...");
-    unregisterAllServiceWorkers();
-    } else{
-    if(!(localStorage.getItem("registered"))){
-    setLoadingScreen("Creating VPN Server...");
-    registerSW("vpn.sw.js?scope=" + btoa(url) + "&token=" + thearray[0], url, thearray[0]);
-    } else{
-    importScriptFromUrl(url + "uv/uv.bundle.js");
-    importScriptFromUrl(url + "uv/uv.config.js");
-    setLoadingScreen("Connecting...");
-    registerSW("dist.sw.js", __uv$config.prefix, null);
-    location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
+    async function initVPN() {
+      if (location.hash != '') {
+        const [token, url] = JSON.parse(atob(location.hash.slice(1)));
+        const pathname = window.location.pathname;
+        const baseUrl = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+
+        console.log(baseUrl);
+        document.querySelector("#normal-screen").style.display = 'none';
+
+        if (!localStorage.getItem("cleared")) {
+          await setLoadingScreen("Clearing service workers...");
+          await unregisterAllServiceWorkers();
+        } else {
+          if (!localStorage.getItem("registered")) {
+            await setLoadingScreen("Creating VPN Server...");
+            await registerSW("vpn.sw.js", baseUrl, token);
+          } else {
+            await importScriptFromUrl(baseUrl + "uv/uv.bundle.js");
+            await importScriptFromUrl(baseUrl + "uv/uv.config.js");
+            await setLoadingScreen("Connecting...");
+            await registerSW("dist.sw.js", __uv$config.prefix, null);
+            location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
+          }
+        }
+      } else {
+        document.querySelector("#vpn-screen").style.display = 'none';
+      }
     }
-    }
-  } else{
-    document.querySelector("#vpn-screen").style.display = 'none';
-  }</script>
+
+    window.onload = initVPN;
+  </script>
 </body>
 </html>
