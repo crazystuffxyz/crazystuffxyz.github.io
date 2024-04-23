@@ -1,6 +1,6 @@
 self.addEventListener('fetch', function(event) {
   var url = new URLSearchParams(self.location.search);
-  var currenturl = event.request.referrer;
+  var currenturl = event.request.url;
   var scope = atob(url.get("scope"));
   var token = atob(url.get("token"));
   var originalResponse;
