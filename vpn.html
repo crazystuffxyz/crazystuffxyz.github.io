@@ -88,16 +88,24 @@ async function registerSW(url, scope, token) {
 const bundleScript = document.createElement('script');
 bundleScript.src = url + "uv/uv.bundle.js";
 bundleScript.onload = () => {
+  try{
   const configScript = document.createElement('script');
   configScript.src = url + "uv/uv.config.js";
   configScript.onload = () => {
+    try{
     localStorage.setItem("first", false);
     registerSW("dist.sw.js", __uv$config.prefix, null);
+    } catch(e){
+      alert(e.message);
+    }
   };
   configScript.onerror = error => {
     alert('Error loading the config script:', error);
   };
   document.body.appendChild(configScript);
+  } catch(e){
+alert(e.message);
+}
 };
 bundleScript.onerror = error => {
   alert('Error loading the bundle script:', error);
@@ -107,8 +115,12 @@ document.body.appendChild(bundleScript);
 alert(e.message);
 }
 } else{
+    try{
     alert("nah");
     location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
+    } catch(e){
+alert(e.message);
+}
 }
 }
     async function importScriptFromUrl(url){
