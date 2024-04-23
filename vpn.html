@@ -16,28 +16,16 @@
 <h1>Loading...</h1>
   </div>
   <script>
-function importTheThing(){
-fetch(url + "uv/uv.bundle.js")
-    .then(x => x.text())
-    .then(y => {
-      eval(y);
-      fetch(url + "uv/uv.config.js")
-    .then(z => z.text())
-    .then(a => {
-      eval(a);
-      try{
-      registerSW("dist.sw.js", __uv$config.prefix, null);
-      } catch(e){
-        alert(e.message);
-      }
-    });
-    });
-}
+    function setLoadingScreen(text){
+      document.querySelectorAll("h1")[1].innerText = text;
+    }
     function unregisterAllServiceWorkers(){
 navigator.serviceWorker.getRegistrations().then(registrations => {
     for (const registration of registrations) {
         registration.unregister();
-    } 
+    }
+  localStorage.setItem("cleared", true);
+  window.location.reload();
 });
   }
       function decodeStr(input) {
@@ -99,21 +87,10 @@ async function registerSW(url, scope, token) {
     scope: scope,
   });
   }
-  if(localStorage.getItem("first")){
-    try{
-    alert("ye");
-    importTheThing();
-    } catch(e){
-alert(e.message);
-}
-} else{
-    try{
-    alert("nah");
-    location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
-    } catch(e){
-alert(e.message);
-}
-}
+  if(!(localStorage.getItem("registered"))){
+  localStorage.setItem("registered", true);
+  window.location.reload();
+  }
 }
     async function importScriptFromUrl(url){
       var thefetch = await fetch(url);
@@ -132,8 +109,21 @@ alert(e.message);
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
-    localStorage.setItem("first", true);
+    if(!(localStorage.getItem("cleared"))){
+    setLoadingScreen("Clearing service workers...");
+    unregisterAllServiceWorkers();
+    } else{
+    if(!(localStorage.getItem("registered"))){
+    setLoadingScreen("Creating VPN Server...");
     registerSW("vpn.sw.js?scope=" + btoa(url) + "&token=" + thearray[0], url, thearray[0]);
+    } else{
+    importScriptFromUrl(url + "uv/uv.bundle.js");
+    importScriptFromUrl(url + "uv/uv.config.js");
+    setLoadingScreen("Connecting...");
+    registerSW("dist.sw.js", __uv$config.prefix, null);
+    location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
+    }
+    }
   } else{
     document.querySelector("#vpn-screen").style.display = 'none';
   }</script>
