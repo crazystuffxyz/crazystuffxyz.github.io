@@ -100,7 +100,6 @@ async function registerSW(url, scope, token) {
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
-    unregisterAllServiceWorkers();
     registerSW("vpn.sw.js?scope=" + btoa(url) + "&token=" + thearray[0], url, thearray[0]);
     importScriptFromUrl(url + "uv/uv.bundle.js");
     importScriptFromUrl(url + "uv/uv.config.js");
