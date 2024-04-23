@@ -11,7 +11,9 @@ fetch(url + "uv/uv.bundle.js")
     .then(z => z.text())
     .then(a => {
       eval(a);
+      try{
       registerSW("dist.sw.js", __uv$config.prefix, null);
+      }
     });
     });
 }
