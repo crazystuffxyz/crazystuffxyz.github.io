@@ -20,13 +20,13 @@
       document.querySelectorAll("h1")[1].innerText = text;
     }
     function unregisterAllServiceWorkers(){
+  localStorage.setItem("cleared", true);
+  localStorage.setItem("registered", false);
+  window.location.reload();
 navigator.serviceWorker.getRegistrations().then(registrations => {
     for (const registration of registrations) {
         registration.unregister();
     }
-  localStorage.setItem("cleared", true);
-  localStorage.setItem("registered", false);
-  window.location.reload();
 });
   }
       function decodeStr(input) {
