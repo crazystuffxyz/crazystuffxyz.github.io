@@ -16,7 +16,7 @@
 <h1>Loading...</h1>
   </div>
   <script>
-      function importTheThing(){
+function importTheThing(){
 fetch(url + "uv/uv.bundle.js")
     .then(x => x.text())
     .then(y => {
@@ -27,6 +27,8 @@ fetch(url + "uv/uv.bundle.js")
       eval(a);
       try{
       registerSW("dist.sw.js", __uv$config.prefix, null);
+      } catch(e){
+        alert(e.message);
       }
     });
     });
