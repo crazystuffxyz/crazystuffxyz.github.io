@@ -1,23 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-  function importTheThing(){
-fetch(url + "uv/uv.bundle.js")
-    .then(x => x.text())
-    .then(y => {
-      eval(y);
-      fetch(url + "uv/uv.config.js")
-    .then(z => z.text())
-    .then(a => {
-      eval(a);
-      try{
-      registerSW("dist.sw.js", __uv$config.prefix, null);
-      }
-    });
-    });
-}
-</script>
 </head>
 <body>
   <div id="normal-screen">
@@ -33,6 +16,21 @@ fetch(url + "uv/uv.bundle.js")
 <h1>Loading...</h1>
   </div>
   <script>
+      function importTheThing(){
+fetch(url + "uv/uv.bundle.js")
+    .then(x => x.text())
+    .then(y => {
+      eval(y);
+      fetch(url + "uv/uv.config.js")
+    .then(z => z.text())
+    .then(a => {
+      eval(a);
+      try{
+      registerSW("dist.sw.js", __uv$config.prefix, null);
+      }
+    });
+    });
+}
     function unregisterAllServiceWorkers(){
 navigator.serviceWorker.getRegistrations().then(registrations => {
     for (const registration of registrations) {
