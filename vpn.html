@@ -103,7 +103,7 @@ var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     registerSW("vpn.sw.js?scope=" + btoa(url) + "&token=" + thearray[0], url, thearray[0]);
     importScriptFromUrl(url + "uv/uv.bundle.js");
     importScriptFromUrl(url + "uv/uv.config.js");
-    registerSW("dist/sw.js", __uv$config.prefix, null);
+    registerSW("dist.sw.js", __uv$config.prefix, null);
     location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
   } else{
     document.querySelector("#vpn-screen").style.display = 'none';
