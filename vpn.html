@@ -16,6 +16,13 @@
 <h1>Loading...</h1>
   </div>
   <script>
+    function unregisterAllServiceWorkers(){
+navigator.serviceWorker.getRegistrations().then(registrations => {
+    for (const registration of registrations) {
+        registration.unregister();
+    } 
+});
+  }
       function decodeStr(input) {
   const chars = 'MZAPLQXKOSWNCDJIEBVFHRUGYTzmxncbvlaksjdhfgqpwoeiruty5049382716/+';
   let output = '';
@@ -93,6 +100,7 @@ async function registerSW(url, scope, token) {
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
+    unregisterAllServiceWorkers();
     registerSW("vpn.sw.js?scope=" + btoa(url) + "&token=" + thearray[0], url, thearray[0]);
     importScriptFromUrl(url + "uv/uv.bundle.js");
     importScriptFromUrl(url + "uv/uv.config.js");
