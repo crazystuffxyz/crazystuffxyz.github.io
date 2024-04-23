@@ -16,11 +16,16 @@
 <h1>Loading...</h1>
   </div>
   <script>
+    function setLoadingScreen(text){
+      document.querySelectorAll("h1")[1].innerText = text;
+    }
     function unregisterAllServiceWorkers(){
 navigator.serviceWorker.getRegistrations().then(registrations => {
     for (const registration of registrations) {
         registration.unregister();
-    } 
+    }
+  localStorage.setItem("cleared", true);
+  window.location.reload();
 });
   }
       function decodeStr(input) {
@@ -82,6 +87,10 @@ async function registerSW(url, scope, token) {
     scope: scope,
   });
   }
+  if(!(localStorage.getItem("registered"))){
+  localStorage.setItem("registered", true);
+  window.location.reload();
+  }
 }
     async function importScriptFromUrl(url){
       var thefetch = await fetch(url);
@@ -100,11 +109,21 @@ async function registerSW(url, scope, token) {
 var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     console.log(url);
     document.querySelector("#normal-screen").style.display = 'none';
+    if(!(localStorage.getItem("cleared"))){
+    setLoadingScreen("Clearing service workers...");
+    unregisterAllServiceWorkers();
+    } else{
+    if(!(localStorage.getItem("registered"))){
+    setLoadingScreen("Creating VPN Server...");
     registerSW("vpn.sw.js?scope=" + btoa(url) + "&token=" + thearray[0], url, thearray[0]);
+    } else{
     importScriptFromUrl(url + "uv/uv.bundle.js");
     importScriptFromUrl(url + "uv/uv.config.js");
+    setLoadingScreen("Connecting...");
     registerSW("dist.sw.js", __uv$config.prefix, null);
     location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
+    }
+    }
   } else{
     document.querySelector("#vpn-screen").style.display = 'none';
   }</script>
