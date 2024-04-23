@@ -83,6 +83,7 @@ async function registerSW(url, scope, token) {
   });
   }
   if(localStorage.getItem("first")){
+    alert("ye");
 const bundleScript = document.createElement('script');
 bundleScript.src = url + "uv/uv.bundle.js";
 bundleScript.onload = () => {
@@ -102,6 +103,7 @@ bundleScript.onerror = error => {
 };
 document.body.appendChild(bundleScript);
 } else{
+    alert("nah");
     location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
 }
 }
