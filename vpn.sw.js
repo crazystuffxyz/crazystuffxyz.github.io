@@ -1,74 +1,28 @@
-  function decodeStr(input) {
-  const chars = 'MZAPLQXKOSWNCDJIEBVFHRUGYTzmxncbvlaksjdhfgqpwoeiruty5049382716/+';
-  let output = '';
-  let i = 0;
-
-  input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');
-
-  while (i < input.length) {
-    const index1 = chars.indexOf(input.charAt(i++));
-    const index2 = chars.indexOf(input.charAt(i++));
-    const index3 = chars.indexOf(input.charAt(i++));
-    const index4 = chars.indexOf(input.charAt(i++));
-    const a = (index1 << 2) | (index2 >> 4);
-    const b = ((index2 & 15) << 4) | (index3 >> 2);
-    const c = ((index3 & 3) << 6) | index4;
-
-    output += String.fromCharCode(a);
-    if (index3 !== 64) output += String.fromCharCode(b);
-    if (index4 !== 64) output += String.fromCharCode(c);
+self.addEventListener('fetch', function(event) {
+  var url = new URLSearchParams(self.location.search);
+  var scope = atob(url.get("scope"));
+  var token = atob(url.get("token"));
+  var text;
+  if (event.request.url.includes(scope + 'uv/uv.')) {
+    event.respondWith(
+      fetch(scope + event.request.referrer.replace(location.origin + scope, "").replace("uv/", "vpn/"))
+        .then(function(response) {
+          text = response.body; 
+          text = text.replace(/theserviceworkerscriptscope/g, scope.slice(0, scope.length - 1)).replace(/thebareservernodeurl/g, token);
+          // Create a new Response object with the fetched content
+          return new Response(text, {
+            headers: {
+              'Content-Type': response.headers.get('Content-Type')
+            }
+          });
+        })
+        .catch(function(error) {
+          // In case of an error, return a simple error response
+          return new Response('Error fetching content: ' + error, {
+            status: 500,
+            statusText: 'Internal Server Error'
+          });
+        })
+    );
   }
-
-  return output;
-}
-function encodeStr(input) {
-  const chars = 'MZAPLQXKOSWNCDJIEBVFHRUGYTzmxncbvlaksjdhfgqpwoeiruty5049382716/+';
-  let output = '';
-  let i = 0;
-
-  while (i < input.length) {
-    const a = input.charCodeAt(i++);
-    const b = input.charCodeAt(i++);
-    const c = input.charCodeAt(i++);
-    const index1 = a >> 2;
-    const index2 = ((a & 3) << 4) | (b >> 4);
-    const index3 = isNaN(b) ? 64 : ((b & 15) << 2) | (c >> 6);
-    const index4 = isNaN(c) ? 64 : c & 63;
-
-    output += chars.charAt(index1) + chars.charAt(index2) + chars.charAt(index3) + chars.charAt(index4);
-  }
-
-  return output;
-}
-self.addEventListener('fetch', (event) => {
-    const url = new URL(event.request.url);
-    const urlParams = new URLSearchParams(url.search);
-    console.log(url.search);
-
-    async function serveFile(urltofetch, urltoserveto) {
-        try {
-            const response = await fetch(urltofetch);
-            const text = await response.text();
-            const modifiedText = text.replace(/\s/g, 'a');
-            return new Response(modifiedText, {
-                status: response.status,
-                statusText: response.statusText,
-                headers: response.headers
-            });
-        } catch (error) {
-            console.error("Error fetching file:", error);
-            return new Response(null, { status: 404, statusText: 'Not Found' });
-        }
-    }
-
-    async function serveAndReplaceSpaces(urltofetch, urltoserveto) {
-        if(url.pathname == urltoserveto){
-        event.respondWith(serveFile(urltofetch, urltoserveto));
-        }
-    }
-
-    serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.config.js", urlParams.get("scope") + "uv/uv.config.js");
-    serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.bundle.js", urlParams.get("scope") + "uv/uv.bundle.js");
-    serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.handler.js", urlParams.get("scope") + "uv/uv.handler.js");
-    serveAndReplaceSpaces(urlParams.get("scope") + "vpn/uv.sw.js", urlParams.get("scope") + "uv/uv.sw.js");
 });
