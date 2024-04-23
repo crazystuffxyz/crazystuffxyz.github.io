@@ -4,7 +4,7 @@ self.addEventListener('fetch', function(event) {
   var scope = atob(url.get("scope"));
   var token = atob(url.get("token"));
   var originalResponse;
-  if (event.request.url.includes(scope + 'uv/uv.')) {
+  if (event.request.url.includes(scope + 'uv/uv.') && event.request.url.endsWith('.js')) {
     event.respondWith(
       fetch(scope + currenturl.replace(location.origin + scope, "").replace("uv/", "vpn/"))
         .then(function(response) {
