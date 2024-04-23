@@ -117,11 +117,25 @@ var url = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     setLoadingScreen("Creating VPN Server...");
     registerSW("vpn.sw.js?scope=" + btoa(url) + "&token=" + thearray[0], url, thearray[0]);
     } else{
-    importScriptFromUrl(url + "uv/uv.bundle.js");
-    importScriptFromUrl(url + "uv/uv.config.js");
-    setLoadingScreen("Connecting...");
+      setLoadingScreen("Connecting...");
+const bundleScript = document.createElement('script');
+bundleScript.src = url + "uv/uv.bundle.js";
+bundleScript.onload = () => {
+  const configScript = document.createElement('script');
+  configScript.src = url + "uv/uv.config.js";
+  configScript.onload = () => {
     registerSW("dist.sw.js", __uv$config.prefix, null);
     location.href = __uv$config.prefix + __uv$config.encodeUrl(thearray[1]);
+  };
+  configScript.onerror = error => {
+    console.error('Error loading the config script:', error);
+  };
+  document.body.appendChild(configScript);
+};
+bundleScript.onerror = error => {
+  console.error('Error loading the bundle script:', error);
+};
+document.body.appendChild(bundleScript);
     }
     }
   } else{
