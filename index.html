@@ -20,7 +20,11 @@ function embed(url){
 }
   
 function play(game){
+    if(location.href.includes("file://") && navigator.onLine == false){
     embed("../crazygamesxyz-assets/Game-Assets/" + game + "/index.html");
+    } else{
+    embed("https://bvguchefnjimwondhxbygrfhuedijm.github.io/test/Assets/" + game + "/index.html");
+    }
 }  
 function noHistory(){
     localStorage.setItem("history", "none");
