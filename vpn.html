@@ -17,7 +17,7 @@
 
   <script>
     async function setLoadingScreen(text) {
-      document.querySelectorAll("h1")[1].innerText = text;
+      document.querySelector("#vpn-screen h1").innerText = text;
     }
 
     async function unregisterAllServiceWorkers() {
@@ -36,18 +36,12 @@
       window.location.reload();
     }
 
-    async function registerSW(url, scope, token) {
+    async function registerSW(url, scope) {
       if (!navigator.serviceWorker) {
         alert("VPN doesn't work, since your browser doesn't support service workers. Sorry!");
         return;
       }
-      const registrationOptions = {
-        scope: scope
-      };
-      if (token) {
-        registrationOptions.token = token;
-      }
-      await navigator.serviceWorker.register(url, registrationOptions);
+      await navigator.serviceWorker.register(url, { scope: scope });
       if (!localStorage.getItem("registered")) {
         localStorage.setItem("registered", true);
         window.location.reload();
@@ -66,7 +60,6 @@
         const pathname = window.location.pathname;
         const baseUrl = pathname.substring(0, pathname.lastIndexOf('/') + 1);
 
-        console.log(baseUrl);
         document.querySelector("#normal-screen").style.display = 'none';
 
         if (!localStorage.getItem("cleared")) {
@@ -75,12 +68,12 @@
         } else {
           if (!localStorage.getItem("registered")) {
             await setLoadingScreen("Creating VPN Server...");
-            await registerSW("vpn.sw.js?scope=" + btoa(baseUrl) + "&token=" + token, baseUrl, token);
+            await registerSW("vpn.sw.js?scope=" + btoa(baseUrl) + "&token=" + token, baseUrl);
+            await registerSW("dist.sw.js", baseUrl); // Register the other service worker as well
           } else {
             await importScriptFromUrl(baseUrl + "uv/uv.bundle.js");
             await importScriptFromUrl(baseUrl + "uv/uv.config.js");
             await setLoadingScreen("Connecting...");
-            await registerSW("dist.sw.js", __uv$config.prefix, null);
             location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
           }
         }
