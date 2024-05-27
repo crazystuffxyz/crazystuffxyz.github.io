@@ -63,8 +63,6 @@
     async function initVPN() {
       if (location.hash != '') {
         const [token, url] = JSON.parse(atob(location.hash.slice(1)));
-        alert(token);
-        alert(url);
         const pathname = window.location.pathname;
         const baseUrl = pathname.substring(0, pathname.lastIndexOf('/') + 1);
 
