@@ -1,11 +1,3 @@
-self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open('dynamic-cache').then(cache => {
-            // No specific files to cache during the install phase, handled during fetch
-        })
-    );
-});
-
 self.addEventListener('fetch', function(event) {
     var url = new URLSearchParams(self.location.search);
     var currenturl = event.request.url;
@@ -20,10 +12,11 @@ self.addEventListener('fetch', function(event) {
                     return cachedResponse;
                 }
 
-                // Fetch and modify the file, then cache it
+                // Fetch the file from the network
                 return fetch(scope + currenturl.replace(location.origin + scope, "").replace("uv/", "vpn/"))
                     .then(response => {
-                        const responseClone = response.clone(); // Clone the response first
+                        // Clone the response before reading its body
+                        const responseClone = response.clone();
                         return response.text().then(text => {
                             var thetext = text;
                             thetext = thetext.replace(/theserviceworkerscriptscope/g, scope.slice(0, scope.length - 1))
@@ -42,14 +35,9 @@ self.addEventListener('fetch', function(event) {
                             });
 
                             return modifiedResponse;
-                        }).catch(error => {
-                            console.error('Error reading response text:', error);
-                            return new Response('Error reading response text: ' + error, {
-                                status: 500,
-                                statusText: 'Internal Server Error'
-                            });
                         });
-                    }).catch(error => {
+                    })
+                    .catch(error => {
                         // In case of an error, return a simple error response
                         console.error('Error fetching content:', error);
                         return new Response('Error fetching content: ' + error, {
