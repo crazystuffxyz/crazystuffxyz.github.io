@@ -6,6 +6,8 @@ self.addEventListener('install', function(event) {
                     return caches.delete(name);
                 })
             );
+        }).catch(error => {
+            console.log('Error during installation:', error);
         })
     );
 });
@@ -26,7 +28,13 @@ self.addEventListener('fetch', function(event) {
                 return fetch(scope + currenturl.replace(location.origin + scope, "").replace("uv/", "vpn/"))
                     .then(response => {
                         // Clone the response before reading its body
-                        const responseToCache = response.clone();
+                        let responseToCache;
+                        try {
+                            responseToCache = response.clone();
+                        } catch (error) {
+                            console.log('Error cloning response:', error);
+                            responseToCache = response;
+                        }
 
                         return responseToCache.text().then(text => {
                             var thetext = text;
@@ -41,6 +49,8 @@ self.addEventListener('fetch', function(event) {
 
                             caches.open('dynamic-cache').then(cache => {
                                 cache.put(event.request, modifiedResponse.clone());
+                            }).catch(error => {
+                                console.log('Error opening cache:', error);
                             });
 
                             return modifiedResponse;
@@ -48,11 +58,9 @@ self.addEventListener('fetch', function(event) {
                     })
                     .catch(error => {
                         console.error('Error fetching content:', error);
-                        return new Response('Error fetching content: ' + error, {
-                            status: 500,
-                            statusText: 'Internal Server Error'
-                        });
                     });
+            }).catch(error => {
+                console.log('Error matching cache:', error);
             })
         );
     }
