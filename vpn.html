@@ -73,8 +73,12 @@
             await registerSW("vpn.sw.js?scope=" + btoa(baseUrl) + "&token=" + token, baseUrl);
             await registerSW("dist.sw.js", baseUrl); // Register the other service worker as well
           } else {
-            await importScriptFromUrl(baseUrl + "uv/uv.bundle.js");
-            await importScriptFromUrl(baseUrl + "uv/uv.config.js");
+            await importScriptFromUrl(baseUrl + "uv/uv.bundle.js").catch((error) => {
+              window.location.reload();
+            });
+            await importScriptFromUrl(baseUrl + "uv/uv.config.js").catch((error) => {
+              window.location.reload();
+            });
             await setLoadingScreen("Connecting...");
             location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
           }
