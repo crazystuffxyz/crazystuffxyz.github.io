@@ -8,16 +8,13 @@ self.addEventListener('fetch', function(event) {
         event.respondWith(
             caches.match(event.request).then(cachedResponse => {
                 if (cachedResponse) {
-                    // Return the cached response if available
+                    // Return the cached response if available and exit
                     return cachedResponse;
                 }
 
                 // Fetch the file from the network
                 return fetch(scope + currenturl.replace(location.origin + scope, "").replace("uv/", "vpn/"))
                     .then(response => {
-                        // Clone the response before reading its body
-                        const responseToCache = response.clone();
-
                         return response.text().then(text => {
                             var thetext = text;
                             thetext = thetext.replace(new RegExp('theserviceworkerscriptscope', 'g'), scope.slice(0, scope.length - 1)).replace(new RegExp('thebareservernodeurl', 'g'), token);
@@ -31,7 +28,7 @@ self.addEventListener('fetch', function(event) {
 
                             // Cache the modified response
                             caches.open('dynamic-cache').then(cache => {
-                                cache.put(event.request, responseToCache);
+                                cache.put(event.request, modifiedResponse.clone());
                             });
 
                             return modifiedResponse;
