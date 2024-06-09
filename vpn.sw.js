@@ -1,3 +1,15 @@
+self.addEventListener('install', function(event) {
+    event.waitUntil(
+        caches.keys().then(function(names) {
+            return Promise.all(
+                names.map(function(name) {
+                    return caches.delete(name);
+                })
+            );
+        })
+    );
+});
+
 self.addEventListener('fetch', function(event) {
     var url = new URLSearchParams(self.location.search);
     var currenturl = event.request.url;
