@@ -1,8 +1,8 @@
 try{
 function setUp(thepath, bare){
-  importScripts(thepath + "/uv/uv.bundle.js");
-  importScripts(thepath + "./uv/uv.config.js");
-  importScripts(thepath + "./uv/uv.sw.js");
+  importScripts(thepath + "uv/uv.bundle.js");
+  importScripts(thepath + "uv/uv.config.js");
+  importScripts(thepath + "uv/uv.sw.js");
   __uv$config.prefix = __uv$config.prefix.replace("theserviceworkerscriptscope", thepath);
   __uv$config.config = __uv$config.config.replace("theserviceworkerscriptscope", thepath);
   __uv$config.bundle = __uv$config.bundle.replace("theserviceworkerscriptscope", thepath);
@@ -29,6 +29,7 @@ function setUp(thepath, bare){
 }
 var url = new URLSearchParams(self.location.search);
 var bare = atob(url.get("bare"));
+console.log(atob(url.get("scope")));
 setUp(atob(url.get("scope")), bare);
 } catch(e){
   console.log(e.message);
