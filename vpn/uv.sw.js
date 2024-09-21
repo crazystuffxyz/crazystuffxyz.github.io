@@ -2,7 +2,7 @@ importScripts('theserviceworkerscriptscope/uv/uv.bundle.js');
 importScripts('theserviceworkerscriptscope/uv/uv.config.js');
 
 class UVServiceWorker extends EventEmitter {   
-    constructor(config = __uv$config) {
+    constructor(config) {
         super();
         if (!config.bare) config.bare = '/bare/';
         this.addresses = typeof config.bare === 'string' ? [ new URL(config.bare, location) ] : config.bare.map(str => new URL(str, location));
