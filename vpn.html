@@ -7,6 +7,7 @@
     <h1>Very basic VPN</h1>
     <input placeholder="Input token here">
     <input placeholder="Input URL here">
+    <input disabled value="fast">
     <button onclick="go();">Go!</button>
     <br><br>
     <p>If you want a token, please go to <a href="tokens.txt">this link</a>, and copy and paste a token. If none work, please let me know via email :)</p>
@@ -60,8 +61,7 @@
       if (location.hash != '') {
         const [token, url] = JSON.parse(atob(location.hash.slice(1)));
         const pathname = window.location.pathname;
-        const baseUrl = pathname.substring(0, pathname.lastIndexOf('/') + 1);
-
+        const baseUrl = pathname.substring(0, pathname.lastIndexOf('/') + 1) + document.querySelectorAll("input")[2].value + "/";
         document.querySelector("#normal-screen").style.display = 'none';
 
         if (!localStorage.getItem("cleared")) {
@@ -70,8 +70,7 @@
         } else {
           if (!localStorage.getItem("registered")) {
             await setLoadingScreen("Creating VPN Server...");
-            await registerSW("vpn.sw.js?scope=" + btoa(baseUrl) + "&token=" + token, baseUrl);
-            await registerSW("dist.sw.js", baseUrl); // Register the other service worker as well
+            await registerSW("dist.sw.js?scope=" + btoa(baseUrl) + "&bare=" + token, baseUrl);
           } else {
             await importScriptFromUrl(baseUrl + "uv/uv.bundle.js").catch((error) => {
               window.location.reload();
