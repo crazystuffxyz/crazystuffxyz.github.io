@@ -9,6 +9,7 @@
     <input placeholder="Input URL here">
     <input disabled value="fast">
     <button onclick="go();">Go!</button>
+    <button onclick="hardreset();">(DEBUG ONLY) - Hard reset</button>
     <br><br>
     <p>If you want a token, please go to <a href="tokens.txt">this link</a>, and copy and paste a token. If none work, please let me know via email :)</p>
   </div>
@@ -29,7 +30,11 @@
       localStorage.setItem("cleared", true);
       window.location.reload();
     }
-
+    async function debug(){
+      await unregisterAllServiceWorkers();
+      localStorage.clear();
+      window.location.reload();
+    }
     async function go() {
       const token = document.querySelectorAll("input")[0].value;
       const url = document.querySelectorAll("input")[1].value;
