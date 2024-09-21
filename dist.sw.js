@@ -27,7 +27,7 @@ function setUp(thepath, bare){
     }
   });
 }
-var url = new URLSearchParams(self.location.search);=
+var url = new URLSearchParams(self.location.search);
 var bare = atob(url.get("bare"));
 setUp(atob(url.get("scope")), bare);
 } catch(e){
