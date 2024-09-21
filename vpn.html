@@ -42,7 +42,7 @@
         alert("VPN doesn't work, since your browser doesn't support service workers. Sorry!");
         return;
       }
-      await navigator.serviceWorker.register(url, { scope: scope }).catch(error =>{
+      await navigator.serviceWorker.register(url).catch(error =>{
         alert(error.message);
       });
       if (!localStorage.getItem("registered")) {
