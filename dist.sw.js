@@ -1,3 +1,4 @@
+try{
 function setUp(scope, bare){
   importScripts(scope + "/uv/uv.bundle.js");
   importScripts(scope + "./uv/uv.config.js");
@@ -30,3 +31,6 @@ var url = new URLSearchParams(self.location.search);
 var scope = atob(url.get("scope"));
 var bare = atob(url.get("bare"));
 setUp(scope, bare);
+} catch(e){
+  console.log(e.message);
+}
