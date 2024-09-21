@@ -21,6 +21,8 @@ try {
     const sw = new UVServiceWorker(__uv$config);
 
     self.addEventListener("fetch", (event) => {
+      console.log(event.request.url);
+      event.request.url.endsWith("uv/uv.config.js");
       if (event.request.url.endsWith("uv/uv.config.js")) {
         event.respondWith(
           new Response("self.__uv$config = " + JSON.stringify(__uv$config), {
