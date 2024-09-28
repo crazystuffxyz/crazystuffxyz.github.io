@@ -25,18 +25,18 @@ try {
 
   // Update the UV configuration with the scope and bare parameters
   console.log("Updating UV configuration...");
-  __uv$config.prefix = __uv$config.prefix.replace("theserviceworkerscriptscope", scope);
-  __uv$config.config = __uv$config.config.replace("theserviceworkerscriptscope", scope);
-  __uv$config.bundle = __uv$config.bundle.replace("theserviceworkerscriptscope", scope);
-  __uv$config.handler = __uv$config.handler.replace("theserviceworkerscriptscope", scope);
-  __uv$config.sw = __uv$config.sw.replace("theserviceworkerscriptscope", scope);
-  __uv$config.bare = bare;
+  self.__uv$config.prefix = self.__uv$config.prefix.replace("theserviceworkerscriptscope", scope);
+  self.__uv$config.config = self.__uv$config.config.replace("theserviceworkerscriptscope", scope);
+  self.__uv$config.bundle = self.__uv$config.bundle.replace("theserviceworkerscriptscope", scope);
+  self.__uv$config.handler = self.__uv$config.handler.replace("theserviceworkerscriptscope", scope);
+  self.__uv$config.sw = self.__uv$config.sw.replace("theserviceworkerscriptscope", scope);
+  self.__uv$config.bare = bare;
 
   console.log("UV configuration updated with scope and bare values.");
 
   // Create the UVServiceWorker with the updated config
   console.log("Creating UVServiceWorker instance...");
-  const sw = new UVServiceWorker(__uv$config);
+  const sw = new UVServiceWorker(self.__uv$config);
   console.log("UVServiceWorker instance created.");
 
   // Fetch event listener outside of a function
@@ -47,7 +47,7 @@ try {
       console.log("Handling request for UV config.");
       // Handle requests for the UV config
       event.respondWith(
-        new Response("self.__uv$config = " + JSON.stringify(__uv$config), {
+        new Response("self.__uv$config = " + JSON.stringify(self.__uv$config), {
           headers: {
             'Content-Type': "application/javascript"
           }
