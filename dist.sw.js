@@ -25,12 +25,14 @@ try {
 
   // Update the UV configuration with the scope and bare parameters
   console.log("Updating UV configuration...");
-  self.__uv$config.prefix = self.__uv$config.prefix.replace("theserviceworkerscriptscope", scope);
-  self.__uv$config.config = self.__uv$config.config.replace("theserviceworkerscriptscope", scope);
-  self.__uv$config.bundle = self.__uv$config.bundle.replace("theserviceworkerscriptscope", scope);
-  self.__uv$config.handler = self.__uv$config.handler.replace("theserviceworkerscriptscope", scope);
-  self.__uv$config.sw = self.__uv$config.sw.replace("theserviceworkerscriptscope", scope);
+  self.__uv$config.prefix = self.__uv$config.prefix.replace("theserviceworkerscriptscope/", scope);
+  self.__uv$config.config = self.__uv$config.config.replace("theserviceworkerscriptscope/", scope);
+  self.__uv$config.bundle = self.__uv$config.bundle.replace("theserviceworkerscriptscope/", scope);
+  self.__uv$config.handler = self.__uv$config.handler.replace("theserviceworkerscriptscope/", scope);
+  self.__uv$config.sw = self.__uv$config.sw.replace("theserviceworkerscriptscope/", scope);
   self.__uv$config.bare = bare;
+  self.__uv$config.encodeUrl = Ultraviolet.codec.xor.encode;
+  self.__uv$config.decodeUrl = Ultraviolet.codec.xor.decode;
 
   console.log("UV configuration updated with scope and bare values.");
 
@@ -47,7 +49,16 @@ try {
       console.log("Handling request for UV config.");
       // Handle requests for the UV config
       event.respondWith(
-        new Response("self.__uv$config = " + JSON.stringify(self.__uv$config), {
+        new Response(`self.__uv$config = {
+    prefix: '${self__uv$config.prefix}',
+    bare: '${self__uv$config.bare}',
+    encodeUrl: Ultraviolet.codec.xor.encode,
+    decodeUrl: Ultraviolet.codec.xor.decode,
+    handler: '${self__uv$config.handler}',
+    bundle: '${self__uv$config.bundle}',
+    config: '${self__uv$config.config}',
+    sw: '${self__uv$config.sw}',
+};`, {
           headers: {
             'Content-Type': "application/javascript"
           }
