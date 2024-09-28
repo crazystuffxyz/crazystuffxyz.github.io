@@ -5,6 +5,8 @@ class UVServiceWorker extends EventEmitter {
     constructor(config) {
         if (!config) config = __uv$config;
         super();
+        config.encodeUrl = __uv$config.encodeUrl;
+        config.decodeUrl = __uv$config.decodeUrl;
         if (!config.bare) config.bare = '/bare/';
         this.addresses = typeof config.bare === 'string' ? [ new URL(config.bare, location) ] : config.bare.map(str => new URL(str, location));
         this.headers = {
