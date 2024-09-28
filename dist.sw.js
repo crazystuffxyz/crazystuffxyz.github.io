@@ -31,8 +31,6 @@ try {
   self.__uv$config.handler = self.__uv$config.handler.replace("theserviceworkerscriptscope/", scope);
   self.__uv$config.sw = self.__uv$config.sw.replace("theserviceworkerscriptscope/", scope);
   self.__uv$config.bare = bare;
-  self.__uv$config.encodeUrl = Ultraviolet.codec.xor.encode;
-  self.__uv$config.decodeUrl = Ultraviolet.codec.xor.decode;
 
   console.log("UV configuration updated with scope and bare values.");
 
