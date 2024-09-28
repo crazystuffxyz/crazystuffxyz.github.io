@@ -48,14 +48,14 @@ try {
       // Handle requests for the UV config
       event.respondWith(
         new Response(`self.__uv$config = {
-    prefix: '${self__uv$config.prefix}',
-    bare: '${self__uv$config.bare}',
+    prefix: '${self.__uv$config.prefix}',
+    bare: '${self.__uv$config.bare}',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
-    handler: '${self__uv$config.handler}',
-    bundle: '${self__uv$config.bundle}',
-    config: '${self__uv$config.config}',
-    sw: '${self__uv$config.sw}',
+    handler: '${self.__uv$config.handler}',
+    bundle: '${self.__uv$config.bundle}',
+    config: '${self.__uv$config.config}',
+    sw: '${self.__uv$config.sw}',
 };`, {
           headers: {
             'Content-Type': "application/javascript"
