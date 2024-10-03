@@ -43,7 +43,7 @@ try {
   self.addEventListener("fetch", (event) => {
     console.log("Intercepted fetch event for: " + event.request.url);
 
-    if (event.request.url.endsWith("uv/uv.config.js")) {
+    if (event.request.url.includes(self.__uv$config.config)) {
       console.log("Handling request for UV config.");
       // Handle requests for the UV config
       event.respondWith(
