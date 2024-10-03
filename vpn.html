@@ -18,7 +18,7 @@
   </div>
 
   <script>
-    async function setLoadingScreen(text) {
+    function setLoadingScreen(text) {
       document.querySelector("#vpn-screen h1").innerText = text;
     }
 
@@ -70,22 +70,24 @@
         document.querySelector("#normal-screen").style.display = 'none';
 
         if (!localStorage.getItem("cleared")) {
-          await setLoadingScreen("Clearing service workers...");
+          setLoadingScreen("Clearing service workers...");
           await unregisterAllServiceWorkers();
         } else {
+          setLoadingScreen("Connecting...");
           if (!localStorage.getItem("registered")) {
-            await setLoadingScreen("Creating VPN Server...");
+            setLoadingScreen("Creating VPN Server...");
             alert(baseUrl);
             await registerSW("dist.sw.js?scope=" + btoa(baseUrl) + "&bare=" + token, baseUrl);
           } else {
+            setTimeout(function(){
             await importScriptFromUrl(baseUrl + "uv/uv.bundle.js").catch((error) => {
               window.location.reload();
             });
             await importScriptFromUrl(baseUrl + "uv/uv.config.js").catch((error) => {
               window.location.reload();
             });
-            await setLoadingScreen("Connecting...");
             location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
+            }, 1000);
           }
         }
       } else {
