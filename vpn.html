@@ -79,7 +79,7 @@
             alert(baseUrl);
             await registerSW("dist.sw.js?scope=" + btoa(baseUrl) + "&bare=" + token, baseUrl);
           } else {
-            setTimeout(function(){
+            setTimeout(async function(){
             await importScriptFromUrl(baseUrl + "uv/uv.bundle.js").catch((error) => {
               window.location.reload();
             });
